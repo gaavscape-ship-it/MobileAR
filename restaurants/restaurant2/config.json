@@ -1,0 +1,388 @@
+{
+  "restaurant": {
+    "id": "restaurant2",
+    "name": "Global Feast",
+    "currency": "₹",
+    "location": "India"
+  },
+  "categories": [
+    {
+      "id": "biryani-veg",
+      "name": "Veg Biryani",
+      "items": [
+        {
+          "id": "bv_1",
+          "name": "Panner Tikka Biryani",
+          "description": "Marinated and grilled paneer cubes layered with aromatic basmati rice.",
+          "price": 270,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.4,
+          "image": "restaurants/restaurant2/dish-images/VegPaneerTikka.png",
+          "model": "/models/biryani.glb"
+        },
+        {
+          "id": "bv_2",
+          "name": "Veg Hyderabadi Biryani",
+          "description": "Authentic Hyderabadi style biryani cooked with lots of fresh vegetables and traditional spices.",
+          "price": 230,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.5,
+          "image": "restaurants/restaurant2/dish-images/veg_hyd_biryani.jpg",
+          "model": "/models/biryani.glb"
+        },
+        {
+          "id": "bv_3",
+          "name": "Mushroom Biryani",
+          "description": "Flavorful basmati rice cooked with fresh mushrooms and a blend of fragrant Indian spices.",
+          "price": 230,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.2,
+          "image": "restaurants/restaurant2/dish-images/Mushroom-Biryani-3.jpg",
+          "model": "/models/biryani.glb"
+        },
+        {
+          "id": "bv_4",
+          "name": "Veg Biryani",
+          "description": "Rice and veggies cooked in a fragrant and flavorful masala seasoned with Indian whole spices served with salan and raita.",
+          "price": 210,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.3,
+          "image": "restaurants/restaurant2/dish-images/easy-vegetable-biryani.jpg",
+          "model": "/models/biryani.glb"
+        },
+        {
+          "id": "bv_5",
+          "name": "Vegetable Handi Biryani",
+          "description": "Mixed vegetables slow-cooked with basmati rice in a traditional handi pot.",
+          "price": 270,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.4,
+          "image": "restaurants/restaurant2/dish-images/veg_handi_biryani.jpg",
+          "model": "/models/biryani.glb"
+        }
+      ]
+    },
+    {
+      "id": "biryani-non-veg",
+      "name": "Non Veg Biryani",
+      "items": [
+        {
+          "id": "bnv_1",
+          "name": "Chicken Dum Biryani",
+          "description": "Classic dum cooked chicken biryani with long grain fragrant basmati rice.",
+          "price": 285,
+          "tags": [
+            "Non-Veg",
+            "Bestseller"
+          ],
+          "isAvailable": true,
+          "rating": 4.8,
+          "image": "restaurants/restaurant2/dish-images/chicken_dum_biryani.jpg",
+          "model": "/models/chicken_biryani.glb"
+        },
+        {
+          "id": "bnv_2",
+          "name": "Chicken Hyderabadi Biryani",
+          "description": "Spicy and flavorful Hyderabadi biryani loaded with tender chicken pieces.",
+          "price": 300,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.6,
+          "image": "https://images.unsplash.com/photo-1589302168068-964664d93dc0",
+          "model": "/models/chicken_biryani.glb"
+        },
+        {
+          "id": "bnv_3",
+          "name": "Chicken Tikka Biryani",
+          "description": "Smoky chicken tikka pieces perfectly layered within aromatic spiced rice.",
+          "price": 315,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.7,
+          "image": "restaurants/restaurant2/dish-images/Tikka-Biryani-jpg.webp",
+          "model": "/models/chicken_biryani.glb"
+        },
+        {
+          "id": "bnv_4",
+          "name": "Mutton Dum Biryani",
+          "description": "Slow-cooked succulent mutton in aromatic spices and basmati rice.",
+          "price": 320,
+          "tags": [
+            "Non-Veg",
+            "Premium"
+          ],
+          "isAvailable": true,
+          "rating": 4.9,
+          "image": "restaurants/restaurant2/dish-images/Best-Mutton-Biryani-Recipe.jpg",
+          "model": "/models/mutton_biryani.glb"
+        },
+        {
+          "id": "bnv_5",
+          "name": "Mutton Hyderabadi Biryani",
+          "description": "Rich and flavorful traditional Hyderabadi biryani with tender mutton.",
+          "price": 380,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": false,
+          "rating": 4.8,
+          "image": "https://images.unsplash.com/photo-1543352658-9af9012f3693",
+          "model": "/models/mutton_biryani.glb"
+        },
+        {
+          "id": "bnv_6",
+          "name": "Prawns Biryani",
+          "description": "Fragrant basmati rice gently cooked with fresh prawns and coastal spices.",
+          "price": 390,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": false,
+          "rating": 4.5,
+          "image": "https://images.unsplash.com/photo-1563379091339-03b21bc4a4f8",
+          "model": "/models/prawn_biryani.glb"
+        },
+        {
+          "id": "bnv_7",
+          "name": "Prawns Tikka Biryani",
+          "description": "Grilled prawn tikka layered and dum-cooked with aromatic rice.",
+          "price": 435,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": false,
+          "rating": 4.6,
+          "image": "https://images.unsplash.com/photo-1563379091339-03b21bc4a4f8",
+          "model": "/models/prawn_biryani.glb"
+        }
+      ]
+    },
+    {
+      "id": "starters-veg",
+      "name": "Veg Starters",
+      "items": [
+        {
+          "id": "sv_1",
+          "name": "Veg Manchurian",
+          "description": "Crispy veg balls tossed in an intensely flavorful and sticky manchurian sauce.",
+          "price": 250,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.2,
+          "image": "restaurants/restaurant2/dish-images/veg_manchurian.jfif",
+          "model": "/models/starter.glb"
+        },
+        {
+          "id": "sv_8",
+          "name": "Gobi Manchurian",
+          "description": "Deep fried, crispy cauliflower florets tossed in a thick and spicy manchurian gravy.",
+          "price": 190,
+          "tags": [
+            "Veg",
+            "Bestseller"
+          ],
+          "isAvailable": true,
+          "rating": 4.7,
+          "image": "restaurants/restaurant2/dish-images/GobiManchurian.jpg",
+          "model": "/models/starter.glb"
+        },
+        {
+          "id": "sv_9",
+          "name": "Gobi Chilli",
+          "description": "Crispy cauliflower florets tossed in a spicy, sweet, and tangy chilli sauce.",
+          "price": 190,
+          "tags": [
+            "Veg",
+            "Spicy"
+          ],
+          "isAvailable": true,
+          "rating": 4.4,
+          "image": "restaurants/restaurant2/dish-images/gobi_chilly.jpg",
+          "model": "/models/starter.glb"
+        }
+      ]
+    },
+    {
+      "id": "starters-non-veg",
+      "name": "Non Veg Starters",
+      "items": [
+        {
+          "id": "snv_11",
+          "name": "Chicken Lollipop",
+          "description": "Crispy fried frenched chicken winglets served with a fiery schezwan dip.",
+          "price": 265,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.8,
+          "image": "https://images.unsplash.com/photo-1527477396000-e27163b481c2",
+          "model": "/models/starter.glb"
+        },
+        {
+          "id": "snv_18",
+          "name": "Chicken Fried Kebab",
+          "description": "Chicken fried kebab.",
+          "price": 150,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.5,
+          "image": "https://images.unsplash.com/photo-1527477396000-e27163b481c2",
+          "model": "/models/starter.glb"
+        },
+        {
+          "id": "snv_29",
+          "name": "Prawns Golden Fry",
+          "description": "Crispy golden fried prawns coated in a seasoned batter, perfectly crunchy.",
+          "price": 420,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.6,
+          "image": "https://images.unsplash.com/photo-1527477396000-e27163b481c2",
+          "model": "/models/starter.glb"
+        }
+      ]
+    },
+    {
+      "id": "thali",
+      "name": "Thali",
+      "items": [
+        {
+          "id": "th_1",
+          "name": "Veg Thali",
+          "description": "Dal Fry+Mixed Veg+Jeera Rice+2 Roti+Onion+Lemon",
+          "price": 230,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.3,
+          "image": "https://images.unsplash.com/photo-1546833998-877b37c2e5c6",
+          "model": "/models/thali.glb"
+        },
+        {
+          "id": "th_2",
+          "name": "Mutton Thali",
+          "description": "2 Roti+Mutton Curry+Rice [1 Bowl]+Lemon",
+          "price": 390,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.7,
+          "image": "https://images.unsplash.com/photo-1546833998-877b37c2e5c6",
+          "model": "/models/thali.glb"
+        }
+      ]
+    },
+    {
+      "id": "main-course-non-veg",
+      "name": "Non Veg Main Course",
+      "items": [
+        {
+          "id": "mcnv_1",
+          "name": "Egg Bhurji",
+          "description": "A wholesome dish prepared with delectable eggs scrambled and flavored with masalas and assorted veggies.",
+          "price": 150,
+          "tags": [
+            "Non-Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.2,
+          "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8",
+          "model": "/models/egg.glb"
+        },
+        {
+          "id": "mcnv_19",
+          "name": "Chicken Kolhapuri",
+          "description": "A delectable flavor packed chicken kolhapuri.",
+          "price": 255,
+          "tags": [
+            "Non-Veg",
+            "Spicy"
+          ],
+          "isAvailable": true,
+          "rating": 4.5,
+          "image": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398",
+          "model": "/models/curry.glb"
+        }
+      ]
+    },
+    {
+      "id": "breads",
+      "name": "Breads",
+      "items": [
+        {
+          "id": "brd_1",
+          "name": "Wheat Tandoori Roti",
+          "description": "Whole wheat flatbread baked to perfection in a traditional clay oven.",
+          "price": 60,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.0,
+          "image": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7",
+          "model": "/models/roti.glb"
+        },
+        {
+          "id": "brd_5",
+          "name": "Naan",
+          "description": "Soft and fluffy Indian traditional flatbread, freshly cooked in a tandoor.",
+          "price": 60,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.4,
+          "image": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7",
+          "model": "/models/naan.glb"
+        }
+      ]
+    },
+    {
+      "id": "rice-items",
+      "name": "Rice",
+      "items": [
+        {
+          "id": "ri_8",
+          "name": "Jeera Rice",
+          "description": "Aromatic rice cooked in a tempering of cumin and whole spices.",
+          "price": 180,
+          "tags": [
+            "Veg"
+          ],
+          "isAvailable": true,
+          "rating": 4.5,
+          "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99",
+          "model": "/models/rice.glb"
+        }
+      ]
+    }
+  ]
+}

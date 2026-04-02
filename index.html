@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AR Food Ordering</title>
+    <!-- Base Path added for relative path routing -->
+    <base href="/mobileAR/">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#ffb3b2",
+                        "surface-container-high": "#ece7e7",
+                        "surface-container-highest": "#e6e1e1",
+                        "surface-dim": "#ddd9d8",
+                        "on-secondary-fixed": "#410008",
+                        "secondary": "#a03e42",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "outline-variant": "#e3bebc",
+                        "primary-fixed-dim": "#ffb3b2",
+                        "tertiary-container": "#008374",
+                        "tertiary": "#00685b",
+                        "background": "#fdf8f8",
+                        "tertiary-fixed": "#8ef5e1",
+                        "inverse-primary": "#ffb3b2",
+                        "secondary-container": "#ff888a",
+                        "secondary-fixed": "#ffdad9",
+                        "on-primary-fixed-variant": "#92001f",
+                        "surface-tint": "#bb152f",
+                        "primary-fixed": "#ffdad9",
+                        "on-tertiary-container": "#f4fffb",
+                        "surface-container": "#f1edec",
+                        "primary-container": "#db3143",
+                        "outline": "#8f6f6f",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fdf8f8",
+                        "on-secondary-container": "#771f26",
+                        "surface-container-low": "#f7f2f2",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#71d8c5",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f4f0ef",
+                        "inverse-surface": "#313030",
+                        "on-background": "#1c1b1b",
+                        "surface-variant": "#e6e1e1",
+                        "on-surface-variant": "#5b403f",
+                        "on-secondary-fixed-variant": "#81272c",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#00201b",
+                        "primary": "#b7112d",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "on-primary-fixed": "#410008",
+                        "on-tertiary-fixed-variant": "#005046"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .category-item.active .category-circle {
+            border: 2px solid #b7112d;
+            padding: 0;
+        }
+
+        body {
+            -webkit-tap-highlight-color: transparent;
+            min-height: max(884px, 100dvh);
+        }
+
+        #ar-modal {
+            backdrop-filter: blur(10px);
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes marqueeBounce {
+
+            0%,
+            20% {
+                transform: translateX(0);
+            }
+
+            80%,
+            100% {
+                transform: translateX(calc(-100% + 5rem));
+            }
+        }
+
+        .marquee-scroll {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marqueeBounce 6s ease-in-out infinite alternate;
+        }
+
+        /* Veg Toggle — Inactive (OFF) */
+        .veg-toggle-btn {
+            border-color: #d1d5db;
+            background: #ffffff;
+        }
+
+        .veg-toggle-btn .veg-toggle-icon {
+            color: #9ca3af;
+        }
+
+        .veg-toggle-btn .veg-toggle-label {
+            color: #9ca3af;
+        }
+
+        .veg-toggle-btn .veg-toggle-track {
+            background: #e5e7eb;
+        }
+
+        .veg-toggle-btn .veg-toggle-thumb {
+            background: #ffffff;
+            left: 2px;
+            border: 1.5px solid #d1d5db;
+        }
+
+        /* Veg Toggle — Active (ON) */
+        .veg-toggle-btn.active {
+            border-color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .veg-toggle-btn.active .veg-toggle-icon {
+            color: #16a34a;
+        }
+
+        .veg-toggle-btn.active .veg-toggle-label {
+            color: #15803d;
+        }
+
+        .veg-toggle-btn.active .veg-toggle-track {
+            background: #16a34a;
+        }
+
+        .veg-toggle-btn.active .veg-toggle-thumb {
+            background: #ffffff;
+            left: calc(100% - 22px);
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface font-body text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed pb-24">
+
+    <div id="app">
+        <!-- VIEW: MENU -->
+        <div id="view-menu" class="view">
+            <!-- Restaurant Header Logo -->
+            <header class="w-full flex items-center gap-3 px-6 pt-6 pb-4 sticky top-0 bg-surface z-30">
+                <span class="material-symbols-outlined text-primary text-4xl"
+                    style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                <h1 id="restaurant-name-header"
+                    class="font-headline text-3xl font-extrabold italic tracking-tight text-primary leading-none flex-1">
+                    Loading...
+                </h1>
+                <!-- Veg Toggle Filter -->
+                <button id="veg-toggle" type="button"
+                    class="veg-toggle-btn flex items-center gap-2 pl-3 pr-1.5 py-1.5 rounded-full border transition-all duration-300 select-none flex-shrink-0"
+                    aria-pressed="false" title="Show only vegetarian dishes">
+                    <span
+                        class="material-symbols-outlined text-base veg-toggle-icon transition-colors duration-300">eco</span>
+                    <span
+                        class="font-label text-sm font-semibold veg-toggle-label transition-colors duration-300">Veg</span>
+                    <span
+                        class="veg-toggle-track relative w-10 h-6 rounded-full transition-colors duration-300 flex items-center">
+                        <span
+                            class="veg-toggle-thumb absolute w-5 h-5 rounded-full shadow-md transition-all duration-300"></span>
+                    </span>
+                </button>
+            </header>
+            <main class="max-w-7xl mx-auto px-6 space-y-4">
+                <!-- Search Bar Section -->
+                <section class="relative">
+                    <div
+                        class="flex items-center bg-surface-container-low rounded-full px-5 py-3 border border-outline-variant/20 shadow-sm focus-within:ring-2 focus-within:ring-primary/20 transition">
+                        <span class="material-symbols-outlined text-primary mr-3">search</span>
+                        <input id="search-input"
+                            class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-medium"
+                            placeholder="Search for dishes" type="text" />
+                    </div>
+                </section>
+
+
+
+                <!-- Categories Section -->
+                <section class="overflow-hidden -mx-6 px-6">
+                    <h2 class="font-headline text-xl font-extrabold tracking-tight mb-4">What's on your mind?</h2>
+                    <div class="flex overflow-x-auto gap-6 hide-scrollbar pb-4" id="category-list">
+                        <!-- Rendered dynamically by components.js -->
+                    </div>
+                </section>
+
+                <!-- Menu Items Listing -->
+                <section class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-headline text-xl font-extrabold tracking-tight">Menu</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="menu-items">
+                        <!-- Rendered dynamically by components.js -->
+                    </div>
+                </section>
+            </main>
+
+            <!-- BottomNavBar (Cart Preview) -->
+            <nav class="fixed bottom-0 left-0 w-full flex justify-center items-center px-4 pb-6 pt-3 bg-[#ffffff]/70 backdrop-blur-xl z-40 rounded-t-[2rem] shadow-[0px_-12px_32px_rgba(28,27,27,0.06)] hidden"
+                id="bottom-nav">
+                <a href="checkout" data-link
+                    class="flex flex-col items-center justify-center bg-[#E03546] text-white rounded-full px-8 py-2 scale-105 active:scale-98 transition-all duration-300 ease-out">
+                    <span class="material-symbols-outlined mb-0.5"
+                        style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+                    <span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-wider">Cart (<span
+                            id="cart-count">0</span>)</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- VIEW: CHECKOUT -->
+        <div id="view-checkout" class="view hidden">
+            <!-- TopAppBar -->
+            <header class="w-full top-0 sticky z-40 bg-[#fdf8f8] border-b border-surface-container-highest">
+                <div class="flex items-center px-6 py-4 w-full max-w-2xl mx-auto">
+                    <a href="/mobileAR/" data-link
+                        class="text-primary hover:opacity-80 transition-opacity scale-95 active:scale-90 mr-4 flex items-center">
+                        <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                    </a>
+                    <h1 class="font-headline font-bold text-xl tracking-tight text-[#1c1b1b]">Checkout</h1>
+                </div>
+            </header>
+
+            <main class="max-w-2xl mx-auto px-6 pb-40">
+                <section class="mt-8">
+                    <div class="flex items-baseline justify-between mb-6">
+                        <h2 class="font-headline text-2xl font-extrabold tracking-tight text-on-surface">Your Selection
+                        </h2>
+                        <span
+                            class="font-label text-sm font-semibold text-primary px-3 py-1 bg-primary-fixed rounded-full"
+                            id="checkout-count">0 Items</span>
+                    </div>
+                    <!-- Dynamic Checkout Items -->
+                    <div class="space-y-4" id="checkout-items">
+                    </div>
+                </section>
+
+                <!-- Bill Details Card -->
+                <section class="mt-12">
+                    <div class="bg-surface-container-low rounded-[2rem] p-8">
+                        <h3 class="font-headline text-xl font-extrabold mb-6">Bill Details</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center font-label text-on-surface-variant">
+                                <span>Item Total</span>
+                                <span class="font-bold text-on-surface" id="bill-total">₹0.00</span>
+                            </div>
+                            <div class="pt-6 mt-4 border-t border-outline-variant/30 flex justify-between items-center">
+                                <span class="font-headline text-xl font-extrabold">Grand Total</span>
+                                <span class="font-headline text-2xl font-extrabold text-primary"
+                                    id="bill-grand-total">₹0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Fixed Checkout Footer -->
+            <div
+                class="fixed bottom-0 left-0 right-0 z-40 p-6 bg-gradient-to-t from-surface via-surface/90 to-transparent">
+                <div class="max-w-2xl mx-auto">
+                    <button id="place-order-btn"
+                        class="group w-full bg-gradient-to-br from-[#b7112d] to-[#db3143] text-white rounded-full py-5 px-8 flex items-center justify-between shadow-[0px_12px_32px_rgba(183,17,45,0.25)] hover:shadow-[0px_16px_40px_rgba(183,17,45,0.35)] transition-all active:scale-95">
+                        <div class="flex flex-col items-start">
+                            <span class="font-label text-[10px] uppercase tracking-[0.2em] font-bold opacity-80">Final
+                                Total</span>
+                            <span class="font-headline text-xl font-extrabold" id="footer-total">₹0.00</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-headline font-bold text-lg">Place Order</span>
+                            <span
+                                class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen AR Modal Overlay -->
+    <div id="ar-modal" class="fixed inset-0 z-[60] bg-black/80 hidden flex-col items-center justify-center p-4">
+        <!-- Close Button -->
+        <div class="absolute top-6 right-6 z-[70]">
+            <button onclick="window.closeArModal()"
+                class="bg-white/10 hover:bg-white/20 text-white rounded-full p-2 backdrop-blur-md transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+        </div>
+
+        <!-- AR Fallback Message -->
+        <div id="ar-fallback"
+            class="hidden absolute top-6 left-6 right-20 bg-surface-container-low/90 backdrop-blur-md text-on-surface px-4 py-3 rounded-2xl text-xs font-medium z-[70] shadow-xl border border-outline-variant/20 leading-relaxed">
+            <span class="font-headline font-bold text-primary block mb-1">AR Not Supported</span>
+            Your device does not support AR. You can still interact with the 3D model below in the browser.
+        </div>
+
+        <div
+            class="w-full max-w-lg aspect-square bg-surface-container-low rounded-3xl overflow-hidden relative shadow-2xl">
+            <model-viewer id="ar-viewer" camera-controls touch-action="none" auto-rotate ar
+                ar-modes="webxr scene-viewer quick-look" ar-placement="floor" shadow-intensity="1" shadow-softness="0.5"
+                exposure="1" environment-image="neutral" scale="0.2 0.2 0.2">
+            </model-viewer>
+            <div class="absolute bottom-6 left-0 w-full flex justify-center pointer-events-none z-10">
+                <div class="bg-black/50 backdrop-blur-md text-white px-6 py-2 rounded-full font-headline font-bold">
+                    <span id="ar-title">Dish Name</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

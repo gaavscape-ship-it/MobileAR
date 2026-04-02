@@ -1,0 +1,179 @@
+{
+  "restaurant": {
+    "id": "restaurant1",
+    "name": "Donne Biryani",
+    "currency": "₹",
+    "location": "India"
+  },
+  "categories": [
+    {
+      "id": "global-cuisine",
+      "name": "Global Cuisine",
+      "items": [
+        {
+          "id": "gc_1",
+          "name": "Grilled Chicken",
+          "description": "Juicy grilled chicken with herbs and spices.",
+          "price": 299,
+          "image": "restaurants/restaurant1/dish-images/grilled-chicken-recipe.jpg",
+          "model": "/restaurants/restaurant1/models/Mazda RX-7.glb",
+          "tags": [
+            "Non-Veg",
+            "Bestseller"
+          ],
+          "rating": 4.5,
+          "isAvailable": true,
+          "portion": "Full"
+        },
+        {
+          "id": "gc_2",
+          "name": "Grilled Chicken Deluxe",
+          "description": "Loaded grilled chicken with spices.",
+          "price": 349,
+          "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIm5jNpOCu4gOgXrLWurfRME2WsrOWAyfNijLNIDFaXGz4kAR5yF_hQ2W8raJBphXVVJBfexK_HIMncH7NUaKt-SSK04N5KswxwsxJIq19lDQIj0Xj1-9hAql0eByMSEnaLB6rfu38ocJ5BpXluAFR0wshweea-PUDlK_FVcBgXqsLONyzkNhfNMdp5HykC2enVFgaOyoFxJYu_RXkuC_kOrvL7xDzaFNqiMPVjxcvKwBE-GkPMwCj3iRpNBi93Ec1d3ErbqFx",
+          "model": "/restaurants/restaurant1/models/pizza.glb",
+          "tags": [
+            "Non-Veg"
+          ],
+          "rating": 4.2,
+          "isAvailable": true,
+          "portion": "Full"
+        }
+      ]
+    },
+    {
+      "id": "starters",
+      "name": "Starters",
+      "items": [
+        {
+          "id": "st_1",
+          "name": "Spring Rolls",
+          "description": "Crispy rolls stuffed with veggies.",
+          "price": 149,
+          "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDrwO1oRNF7UcsiTB7S9OLt_J2QVWMzHN6b6j47V1DuVkVDWYrMxmvg25Ab9O4LB-Jk6GA37LhgGi0Aw6eP4EW0DT9rdV696iiZ8g1LJADNpW-qc-aPbOdi1fJ96-7zXD0k3K-5cKFY97yHWBz_xS4sQKN9VU4p3FOoomsORsrd0v_iVP_R8LzuV6uyc-K_HX_qGajT46rC15KboouiXBvHB86iqI_dB6Ax0S-BOQu5UsJfZ50z4t3Bt0RANGHZxSAv2u1xYWrO",
+          "model": "/restaurants/restaurant1/models/burger.glb",
+          "tags": [
+            "Veg"
+          ],
+          "rating": 4.1,
+          "isAvailable": true,
+          "portion": "6 pieces"
+        },
+        {
+          "id": "st_2",
+          "name": "Chicken Bites",
+          "description": "Crispy fried chicken bites.",
+          "price": 199,
+          "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBxsy-Z-Q8SLqzl6Nsz8ct0f0HIl0rC9IgIyb7AfiO8HcsJ_OG8BBrUY2fQ0eYko5DWjN4WLfUZRVHrNbQvzncs1YyVXXrTFjwN5RDd6B-dbBMWVJqOOT7hWpMVLp5lyE_D1QdDSfjguwwDsLbCfEEc9BWdAMH25fBwg0LyL0qB4Tx_QhALCrrOcIzI784RMkQ3yalZsPjRgfMisFipXkZxpHs9hfgXjQEeQnXC5-Rx1njzDWWiRL63dlaP7eU1Yefmq1bUrfe3",
+          "model": "/restaurants/restaurant1/models/burger.glb",
+          "tags": [
+            "Non-Veg",
+            "Spicy"
+          ],
+          "rating": 4.3,
+          "isAvailable": true,
+          "portion": "10 pieces"
+        }
+      ]
+    },
+    {
+      "id": "biryani",
+      "name": "Rice & Biryani",
+      "items": [
+        {
+          "id": "br_1",
+          "name": "Chicken Biryani",
+          "description": "Aromatic basmati rice with chicken.",
+          "price": 249,
+          "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCZcQmaIo9R_rn5SFk_8J_JS2uTyVGHqzAICIUuEvklt0_AmS4UiRHjTlFWT2WmBfnYC_PVeG8cfAXXa4ZJ0E4g6SxdSDyN1YpVcEETDvtzGtT78PfEQDi9A02iiE6Y5aaH3juOsYWF0WgbgLXXjNjtGH4HZJhCEV841YEHIoaxjU_FksvlYjgaIpWk6jYQ8gGEPRct73LU_rSKg1-jhnLn86WQ1cNS1L_z_7bQJpSnfGVu9K8Uy-p_m8tKO6cgO0Jw2hC-JMsO",
+          "model": "/restaurants/restaurant1/models/burger.glb",
+          "tags": [
+            "Non-Veg",
+            "Bestseller"
+          ],
+          "rating": 4.6,
+          "isAvailable": true,
+          "portion": "Full"
+        },
+        {
+          "id": "br_2",
+          "name": "Veg Biryani",
+          "description": "Delicious vegetable biryani.",
+          "price": 199,
+          "image": "restaurants/restaurant1/dish-images/VegPaneerTikka.png",
+          "model": "/restaurants/restaurant1/models/burger1.glb",
+          "tags": [
+            "Veg"
+          ],
+          "rating": 4.2,
+          "isAvailable": true,
+          "portion": "Full"
+        },
+        {
+          "id": "br_3",
+          "name": "Prawns Biryani",
+          "description": "Aromatic basmati rice with Prawns.",
+          "price": 249,
+          "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCZcQmaIo9R_rn5SFk_8J_JS2uTyVGHqzAICIUuEvklt0_AmS4UiRHjTlFWT2WmBfnYC_PVeG8cfAXXa4ZJ0E4g6SxdSDyN1YpVcEETDvtzGtT78PfEQDi9A02iiE6Y5aaH3juOsYWF0WgbgLXXjNjtGH4HZJhCEV841YEHIoaxjU_FksvlYjgaIpWk6jYQ8gGEPRct73LU_rSKg1-jhnLn86WQ1cNS1L_z_7bQJpSnfGVu9K8Uy-p_m8tKO6cgO0Jw2hC-JMsO",
+          "model": "/restaurants/restaurant1/models/burger.glb",
+          "tags": [
+            "Non-Veg",
+            "Bestseller"
+          ],
+          "rating": 4.6,
+          "isAvailable": true,
+          "portion": "Full"
+        },
+        {
+          "id": "br_4",
+          "name": "Veg Biryani",
+          "description": "Delicious vegetable biryani.",
+          "price": 199,
+          "image": "restaurants/restaurant1/dish-images/VegPaneerTikka.png",
+          "model": "/restaurants/restaurant1/models/burger1.glb",
+          "tags": [
+            "Veg"
+          ],
+          "rating": 4.2,
+          "isAvailable": true,
+          "portion": "Full"
+        }
+      ]
+    },
+    {
+      "id": "drinks",
+      "name": "Drinks",
+      "items": [
+        {
+          "id": "dr_1",
+          "name": "black coffee",
+          "description": "Refreshing black coffee.",
+          "price": 149,
+          "image": "restaurants/restaurant1/dish-images/cup_of_coffee.webp",
+          "model": "/restaurants/restaurant1/models/cup_of_coffee.glb",
+          "tags": [
+            "Veg"
+          ],
+          "rating": 4.1,
+          "isAvailable": true,
+          "portion": "6 pieces"
+        },
+        {
+          "id": "dr_2",
+          "name": "Monster Drink",
+          "description": "Refreshing Monster Drink.",
+          "price": 199,
+          "image": "restaurants/restaurant1/dish-images/monster_energy_drink.avif",
+          "model": "/restaurants/restaurant1/models/monster_energy_drink.glb",
+          "tags": [
+            "Veg",
+            "Spicy"
+          ],
+          "rating": 4.3,
+          "isAvailable": true,
+          "portion": "10 pieces"
+        }
+      ]
+    }
+  ]
+}
