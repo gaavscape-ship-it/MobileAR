@@ -9,21 +9,15 @@ let vegOnly = false;
 
 // Determine base URL since we are running in /mobileAR/ folder instead of root
 const baseTag = document.querySelector('base');
-const basePath = baseTag ? baseTag.getAttribute('href') : '/mobileAR/';
+const basePath = baseTag ? baseTag.getAttribute('href') : '/MobileAR/';
 
 async function init() {
-    // Determine restaurantId from path
-    let currentPath = window.location.pathname;
-    if (currentPath.startsWith(basePath)) {
-        currentPath = currentPath.substring(basePath.length);
-    } else if (currentPath.startsWith('/')) {
-        currentPath = currentPath.substring(1);
-    }
-    
-    const pathSegments = currentPath.split('/').filter(Boolean);
-    if (pathSegments.length > 0 && pathSegments[0] !== 'checkout') {
-        restaurantId = pathSegments[0];
-    }
+    // --- Query-parameter routing (GitHub Pages compatible) ---
+    // Instead of path-based routing (/MobileAR/restaurant2), we use
+    // query params: /MobileAR/?resId=restaurant2
+    // This avoids 404s on GitHub Pages which has no server-side routing.
+    const params = new URLSearchParams(window.location.search);
+    restaurantId = params.get('resId') || 'restaurant1';
 
     try {
         const response = await fetch(`${basePath}restaurants/${restaurantId}/config.json`);
@@ -87,12 +81,14 @@ async function init() {
 }
 
 function handleRoute() {
-    const path = window.location.pathname;
+    // Use query param ?view=checkout instead of path-based /checkout
+    const params = new URLSearchParams(window.location.search);
+    const currentView = params.get('view');
 
     const viewMenu = document.getElementById('view-menu');
     const viewCheckout = document.getElementById('view-checkout');
 
-    if (path.includes('checkout')) {
+    if (currentView === 'checkout') {
         viewMenu.classList.add('hidden');
         viewCheckout.classList.remove('hidden');
         renderCheckoutItems();
@@ -106,19 +102,34 @@ function handleRoute() {
     }
 }
 
+/**
+ * Builds a query-string URL preserving the resId param.
+ * @param {Object} [extraParams] - Additional query params, e.g. { view: 'checkout' }
+ * @returns {string} Full URL path with query string
+ */
+function buildUrl(extraParams = {}) {
+    const qp = new URLSearchParams();
+    qp.set('resId', restaurantId);
+    for (const [k, v] of Object.entries(extraParams)) {
+        qp.set(k, v);
+    }
+    return `${basePath}?${qp.toString()}`;
+}
+
 function setupRouter() {
     document.addEventListener('click', e => {
         const link = e.target.closest('[data-link]');
         if (link) {
             e.preventDefault();
             const href = link.getAttribute('href');
-            
-            const cleanBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
-            let finalHref = href;
+
+            // Route via query params instead of path segments
+            let finalHref;
             if (href === 'checkout') {
-                finalHref = `${cleanBasePath}/${restaurantId}/checkout`;
-            } else if (href === basePath || href === '/mobileAR/' || href === '/') {
-                finalHref = `${cleanBasePath}/${restaurantId}`;
+                finalHref = buildUrl({ view: 'checkout' });
+            } else {
+                // Navigate back to the menu (home)
+                finalHref = buildUrl();
             }
 
             history.pushState(null, null, finalHref);
@@ -129,14 +140,13 @@ function setupRouter() {
 
     window.addEventListener('popstate', handleRoute);
 
-    // Expose close/clear functionality globally or via events
+    // Place order: clear cart and return to menu
     const placeOrderBtn = document.getElementById('place-order-btn');
     if (placeOrderBtn) {
         placeOrderBtn.addEventListener('click', () => {
             alert('Order Placed Successfully!');
             clearCart();
-            const cleanBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
-            history.pushState(null, null, `${cleanBasePath}/${restaurantId}`);
+            history.pushState(null, null, buildUrl());
             handleRoute();
             window.scrollTo(0, 0);
         });
