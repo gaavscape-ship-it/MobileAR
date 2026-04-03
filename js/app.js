@@ -188,6 +188,7 @@ window.openArModal = function (modelUrl, itemName) {
     const modal = document.getElementById('ar-modal');
     const viewer = document.getElementById('ar-viewer');
     const title = document.getElementById('ar-title');
+    const content = document.getElementById('ar-modal-content');
 
     title.innerText = itemName;
     const finalModelUrl = modelUrl.startsWith('/') ? `${basePath.replace(/\/$/, '')}${modelUrl}` : modelUrl;
@@ -202,6 +203,14 @@ window.openArModal = function (modelUrl, itemName) {
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 
+    // Trigger smooth entry animation
+    requestAnimationFrame(() => {
+        modal.classList.remove('modal-hidden');
+    });
+    if (content) {
+        content.classList.add('modal-content-enter');
+    }
+
     const fallbackMessage = document.getElementById('ar-fallback');
     // Always start with fallback hidden
     if (fallbackMessage) {
@@ -214,12 +223,61 @@ window.openArModal = function (modelUrl, itemName) {
 
 window.closeArModal = function () {
     const modal = document.getElementById('ar-modal');
-    const viewer = document.getElementById('ar-viewer');
+    const content = document.getElementById('ar-modal-content');
 
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
+    modal.classList.add('modal-hidden');
+
+    // Wait for transition to finish before hiding
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        if (content) content.classList.remove('modal-content-enter');
+    }, 300);
 
     // Removed viewer.src = '' because forcefully clearing the source caused memory/WebGL crashes and freezing when re-opening the same model.
+
+    // Restore background scrolling
+    document.body.style.overflow = '';
+}
+
+// Global 2D Image Modal handling (fallback for items without AR models)
+window.openImageModal = function (imageUrl, itemName) {
+    const modal = document.getElementById('image-modal');
+    const viewer = document.getElementById('image-viewer');
+    const title = document.getElementById('image-title');
+    const content = document.getElementById('image-modal-content');
+
+    title.innerText = itemName;
+    viewer.src = imageUrl;
+    viewer.alt = itemName;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    // Trigger smooth entry animation
+    requestAnimationFrame(() => {
+        modal.classList.remove('modal-hidden');
+    });
+    if (content) {
+        content.classList.add('modal-content-enter');
+    }
+
+    // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
+}
+
+window.closeImageModal = function () {
+    const modal = document.getElementById('image-modal');
+    const content = document.getElementById('image-modal-content');
+
+    modal.classList.add('modal-hidden');
+
+    // Wait for transition to finish before hiding
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        if (content) content.classList.remove('modal-content-enter');
+    }, 300);
 
     // Restore background scrolling
     document.body.style.overflow = '';
