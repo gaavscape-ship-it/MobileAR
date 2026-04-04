@@ -12,6 +12,7 @@ const baseTag = document.querySelector('base');
 const basePath = baseTag ? baseTag.getAttribute('href') : '/MobileAR/';
 
 async function init() {
+
     // --- Query-parameter routing (GitHub Pages compatible) ---
     // Instead of path-based routing (/MobileAR/restaurant2), we use
     // query params: /MobileAR/?resId=restaurant2
@@ -130,6 +131,7 @@ function setupRouter() {
             } else {
                 // Navigate back to the menu (home)
                 finalHref = buildUrl();
+
             }
 
             history.pushState(null, null, finalHref);
