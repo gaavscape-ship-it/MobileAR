@@ -30,7 +30,7 @@
           "description": "Spicy roasted chicken cooked in tandoor.",
           "price": 349,
           "image": "restaurants/restaurant3/dish-images/tandoori_chicken.jpg",
-          "model": "/restaurants/restaurant3/models/tandoori_chicken_poly.glb",
+          "model": "/restaurants/restaurant3/models/tandoori_chicken-poly.glb",
           "tags": [
             "Non-Veg",
             "Spicy"
@@ -191,7 +191,7 @@
           "description": "Loaded cheesy pizza platter.",
           "price": 299,
           "image": "restaurants/restaurant3/dish-images/pizza.jpg",
-          "model": "/restaurants/restaurant3/models/pizza_tray.glb",
+          "model": "/restaurants/restaurant3/models/pizza__tray.glb",
           "tags": [
             "Veg"
           ],
@@ -260,7 +260,7 @@
           "description": "Classic coffee-flavored Italian dessert.",
           "price": 199,
           "image": "restaurants/restaurant3/dish-images/tiramisu.jpg",
-          "model": "/restaurants/restaurant3/models/tiramisu_low_poly_challenge_desserts.glb",
+          "model": "/restaurants/restaurant3/models/tiramisu_-_low_poly_challenge_desserts.glb",
           "tags": [
             "Veg"
           ],

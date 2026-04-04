@@ -12,17 +12,27 @@ const baseTag = document.querySelector('base');
 const basePath = baseTag ? baseTag.getAttribute('href') : '/mobileAR/';
 
 async function init() {
-    // Determine restaurantId from path
-    let currentPath = window.location.pathname;
-    if (currentPath.startsWith(basePath)) {
-        currentPath = currentPath.substring(basePath.length);
-    } else if (currentPath.startsWith('/')) {
-        currentPath = currentPath.substring(1);
-    }
-    
-    const pathSegments = currentPath.split('/').filter(Boolean);
-    if (pathSegments.length > 0 && pathSegments[0] !== 'checkout') {
-        restaurantId = pathSegments[0];
+    // Parse resId from query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const resIdParam = urlParams.get('resId');
+
+    if (resIdParam) {
+        restaurantId = resIdParam;
+    } else {
+        // Fallback for path-based routing
+        let currentPath = window.location.pathname;
+        if (currentPath.startsWith(basePath)) {
+            currentPath = currentPath.substring(basePath.length);
+        } else if (currentPath.startsWith('/')) {
+            currentPath = currentPath.substring(1);
+        }
+        
+        const pathSegments = currentPath.split('/').filter(Boolean);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'checkout' && pathSegments[0] !== 'index.html') {
+            restaurantId = pathSegments[0];
+        } else {
+            restaurantId = 'restaurant1'; // Default
+        }
     }
 
     try {
@@ -115,10 +125,13 @@ function setupRouter() {
             
             const cleanBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
             let finalHref = href;
+            
+            // To support query params, we only change the hash/path and keep the search if needed
+            // Or explicitly push ?resId=
             if (href === 'checkout') {
-                finalHref = `${cleanBasePath}/${restaurantId}/checkout`;
+                finalHref = `${cleanBasePath}/checkout?resId=${restaurantId}`;
             } else if (href === basePath || href === '/mobileAR/' || href === '/') {
-                finalHref = `${cleanBasePath}/${restaurantId}`;
+                finalHref = `${cleanBasePath}/?resId=${restaurantId}`;
             }
 
             history.pushState(null, null, finalHref);
@@ -136,7 +149,7 @@ function setupRouter() {
             alert('Order Placed Successfully!');
             clearCart();
             const cleanBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
-            history.pushState(null, null, `${cleanBasePath}/${restaurantId}`);
+            history.pushState(null, null, `${cleanBasePath}/?resId=${restaurantId}`);
             handleRoute();
             window.scrollTo(0, 0);
         });
