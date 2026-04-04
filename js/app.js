@@ -1,5 +1,6 @@
 import { getConfig, setConfig, subscribe, clearCart } from './store.js';
 import { renderCategories, renderMenuItems, renderCartPreview, renderCheckoutItems, renderBillDetails } from './components.js';
+import { trackSiteVisit, trackModelView } from './tracker.js';
 
 let activeCategory = 'all';
 let fullMenu = [];
@@ -9,7 +10,7 @@ let vegOnly = false;
 
 // Determine base URL since we are running in /mobileAR/ folder instead of root
 const baseTag = document.querySelector('base');
-const basePath = baseTag ? baseTag.getAttribute('href') : '/MobileAR/';
+const basePath = baseTag ? baseTag.getAttribute('href') : '/mobileAR/';
 
 async function init() {
     // --- Query-parameter routing (GitHub Pages compatible) ---
@@ -35,6 +36,9 @@ async function init() {
 
         setupRouter();
         handleRoute();
+
+        // Track site visit for analytics natively once app stabilizes
+        trackSiteVisit(restaurantId);
 
         // Subscribe to store changes to update UI automatically
         subscribe(() => {
@@ -184,7 +188,7 @@ function handleCategorySelect(categoryId) {
 }
 
 // Global AR Modal handling
-window.openArModal = function (modelUrl, itemName) {
+window.openArModal = function (modelUrl, itemName, itemId) {
     const modal = document.getElementById('ar-modal');
     const viewer = document.getElementById('ar-viewer');
     const title = document.getElementById('ar-title');
@@ -202,6 +206,9 @@ window.openArModal = function (modelUrl, itemName) {
 
     modal.classList.remove('hidden');
     modal.classList.add('flex');
+
+    // Track analytics event asynchronously
+    if (itemId) trackModelView(restaurantId, itemId, itemName);
 
     // Trigger smooth entry animation
     requestAnimationFrame(() => {

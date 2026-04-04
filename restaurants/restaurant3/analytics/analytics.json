@@ -1,0 +1,24 @@
+{
+  "restaurantId": "restaurant3",
+  "totalSiteVisits": 1,
+  "totalModelViews": 0,
+  "lastUpdated": "2026-04-04T05:40:25.781Z",
+  "dailyStats": {
+    "2026-04-04": {
+      "siteVisits": 1,
+      "modelViews": 0
+    }
+  },
+  "hourlyStats": {
+    "2026-04-04": {
+      "5": 1
+    }
+  },
+  "items": {},
+  "events": [
+    {
+      "type": "SITE_VISIT",
+      "timestamp": "2026-04-04T05:40:25.780Z"
+    }
+  ]
+}

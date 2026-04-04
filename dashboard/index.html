@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Ethereal AR | Dashboard</title>
+    <!-- Relative base path -->
+    <base href="../" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-primary": "#76d6d5",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#aacdcc",
+                        "on-tertiary-fixed": "#341100",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf9f8",
+                        "on-secondary-fixed": "#002020",
+                        "primary-fixed-dim": "#76d6d5",
+                        "surface-container": "#f0edec",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#3e4949",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-container": "#c2e7e6",
+                        "on-tertiary-container": "#fff9f7",
+                        "on-secondary-fixed-variant": "#2b4c4c",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "background": "#fcf9f8",
+                        "outline": "#6e7979",
+                        "tertiary-container": "#a96039",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#733512",
+                        "primary-fixed": "#93f2f2",
+                        "outline-variant": "#bdc9c8",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#006a6a",
+                        "surface-bright": "#fcf9f8",
+                        "primary": "#006565",
+                        "on-primary-fixed": "#002020",
+                        "on-secondary-container": "#476868",
+                        "tertiary-fixed-dim": "#ffb692",
+                        "on-surface": "#1c1b1b",
+                        "secondary-fixed": "#c5e9e9",
+                        "on-primary-container": "#e3fffe",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-background": "#1c1b1b",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#313030",
+                        "surface-dim": "#dcd9d9",
+                        "secondary": "#436464",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdbcb",
+                        "tertiary": "#8b4823",
+                        "primary-container": "#008080",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf9f8;
+            min-height: max(884px, 100dvh);
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Helper classes for view transitions */
+        .spa-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .spa-view.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .tap-highlight-none {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .chart-gradient-primary {
+            background: linear-gradient(180deg, rgba(0, 101, 101, 0.1) 0%, rgba(0, 101, 101, 0) 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-32">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full z-50 bg-[#fcf9f8]/70 dark:bg-[#1c1b1b]/70 backdrop-blur-xl flex justify-between items-center px-6 py-4">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[#006565] dark:text-[#008080] text-3xl" style="font-variation-settings: 'FILL' 1;">bubble_chart</span>
+            <span class="font-headline font-bold text-xl text-[#006565] dark:text-[#008080]">Ethereal AR</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8" id="desktop-nav">
+            <a class="nav-link font-headline font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity" data-target="dashboard-view" href="#">Dashboard</a>
+            <a class="nav-link font-headline font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity" data-target="analytics-view" href="#">Global Analytics</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high ring-2 ring-primary/10">
+                <img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdGb9UqC-LkvRqyVr4Z9WgH5sz9MlCvZfwjATOMfg2OcTPcJNovYzwZyLYRIQyNQX3YwCkXc7F2x0-V9FsicBHYfPa06IdFHOh7FW36UiY7-RTQ5q_zN6Y5gVJb01ectpm0c-ECgYhhCAbnEZtLiQcFkjdEC_n43G1MQmd6jo4DKwTYj5k_BIjTH40-qUnvUzjFCchRN9xC8qO_2HNMjwK2xhCMCm5DS9Aili2XFLTv9c242Jf-_ir3bMsf4WXm3l5x_GMRmfTUoRs" />
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pt-28">
+
+        <!-- ERROR STATE (Global) -->
+        <div id="error-state" class="hidden my-12 bg-error-container text-on-error-container p-6 rounded-xl flex items-center gap-4">
+            <span class="material-symbols-outlined text-3xl">error</span>
+            <div>
+                <h3 class="font-headline font-bold text-lg">Data Loading Error</h3>
+                <p class="font-body text-sm" id="error-message">Could not connect to the Backend Tracking Engine. Ensure index.js is running.</p>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VIEW: Dashboard (Portfolio Overview) -->
+        <!-- ============================================== -->
+        <div id="dashboard-view" class="spa-view active">
+            <!-- Summary Header -->
+            <section class="mb-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h1 class="text-on-surface font-headline font-bold text-4xl md:text-5xl tracking-tight mb-2">Portfolio Overview</h1>
+                        <div class="flex items-center gap-2 px-4 py-1.5 bg-secondary-container text-on-secondary-container rounded-full w-fit">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                            <span class="text-sm font-semibold"><span id="db-active-count">0</span> Active Restaurants</span>
+                        </div>
+                    </div>
+                    <!-- Quick Filter Stats -->
+                    <div class="grid grid-cols-2 md:flex gap-4">
+                        <div class="bg-surface-container-low p-6 rounded-xl min-w-[160px]">
+                            <span class="block text-xs font-label font-semibold text-outline tracking-widest uppercase mb-1">Total AR Views</span>
+                            <span class="text-3xl font-headline font-bold text-primary" id="db-total-ar-views">0</span>
+                        </div>
+                        <div class="bg-surface-container-low p-6 rounded-xl min-w-[160px]">
+                            <span class="block text-xs font-label font-semibold text-outline tracking-widest uppercase mb-1">Total Site Visits</span>
+                            <span class="text-3xl font-headline font-bold text-tertiary" id="db-total-site-visits">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search & Filters -->
+            <section class="mb-10 flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-outline">search</span>
+                    <input id="db-search" class="w-full pl-14 pr-6 py-5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline transition-all duration-300" placeholder="Search by name or location..." type="text" />
+                </div>
+                <!-- Filter Toggle Button opens the modal -->
+                <button onclick="document.getElementById('filter-modal').classList.remove('hidden')" class="flex items-center justify-center gap-3 px-8 py-5 bg-primary text-on-primary rounded-xl font-semibold hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/10">
+                    <span class="material-symbols-outlined">tune</span>
+                    Filters
+                </button>
+            </section>
+
+            <!-- Restaurant Grid -->
+            <section id="db-restaurant-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                <!-- Rendered dynamically via js -->
+                <div class="col-span-full py-20 text-center text-outline">
+                    Loading restaurant portfolio...
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: Global Analytics Insights -->
+        <!-- ============================================== -->
+        <div id="analytics-view" class="spa-view">
+            <!-- Page Header -->
+            <div class="mb-12">
+                <div class="flex items-center gap-2 text-primary mb-2">
+                    <span class="material-symbols-outlined text-sm">auto_graph</span>
+                    <span class="font-label font-semibold text-[0.75rem] uppercase tracking-widest">Performance Metrics</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-on-surface">Analytics Insights</h1>
+                <p class="text-on-surface-variant mt-4 max-w-2xl text-lg">Visualizing real-time AR interactions and menu performance across your digital spatial dining experience.</p>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Total Metrics Highlight -->
+                <div class="md:col-span-4 bg-primary text-white rounded-xl p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="material-symbols-outlined text-4xl mb-6">visibility</span>
+                        <h3 class="text-lg font-medium opacity-80">Total Ecosystem Views</h3>
+                        <div class="text-6xl font-bold mt-2" id="analytics-total-views">0</div>
+                    </div>
+                    <div class="mt-8 flex items-center gap-2 text-primary-fixed">
+                        <span class="material-symbols-outlined">trending_up</span>
+                        <span class="font-semibold" id="analytics-growth">+0% vs last week</span>
+                    </div>
+                </div>
+
+                <!-- Section: Time-Based Views Chart -->
+                <div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/15 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-12">
+                        <div>
+                            <h2 class="text-xl font-semibold mb-1">AR Engagement Timeline (Simulation)</h2>
+                            <span class="text-label-md text-on-surface-variant">Daily views for the last 7 days</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full">
+                            <span class="w-2 h-2 rounded-full bg-primary"></span>
+                            <span class="text-xs font-semibold text-on-surface-variant">Active Views</span>
+                        </div>
+                    </div>
+
+                    <!-- Mock Line Chart Visualization -->
+                    <div class="relative h-64 flex items-end justify-between gap-2 px-4 opacity-50">
+                        <div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+                            <div class="border-t border-outline-variant w-full"></div>
+                            <div class="border-t border-outline-variant w-full"></div>
+                            <div class="border-t border-outline-variant w-full"></div>
+                            <div class="border-t border-outline-variant w-full"></div>
+                        </div>
+                        <svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 700 200">
+                            <defs>
+                                <lineargradient id="line-grad" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#006565" stop-opacity="0.2"></stop>
+                                    <stop offset="100%" stop-color="#006565" stop-opacity="0"></stop>
+                                </lineargradient>
+                            </defs>
+                            <path d="M0,150 Q100,80 200,120 T400,60 T600,90 T700,40 V200 H0 Z" fill="url(#line-grad)"></path>
+                            <path d="M0,150 Q100,80 200,120 T400,60 T600,90 T700,40" fill="none" stroke="#006565" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+                            <!-- Data Points -->
+                            <circle cx="200" cy="120" fill="#006565" r="6" stroke="#ffffff" stroke-width="2"></circle>
+                            <circle cx="400" cy="60" fill="#006565" r="6" stroke="#ffffff" stroke-width="2"></circle>
+                            <circle cx="700" cy="40" fill="#006565" r="6" stroke="#ffffff" stroke-width="2"></circle>
+                        </svg>
+                    </div>
+                    <!-- X-Axis Dates -->
+                    <div class="flex justify-between mt-6 px-4">
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Day 1</span>
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Day 2</span>
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Day 3</span>
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Day 4</span>
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Day 5</span>
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Day 6</span>
+                        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Today</span>
+                    </div>
+                </div>
+
+                <!-- Spatial Heatmap Preview (AR Specific) -->
+                <div class="md:col-span-12 relative overflow-hidden bg-surface-container-low rounded-xl p-8 min-h-[400px]">
+                    <div class="relative z-10">
+                        <h2 class="text-2xl font-bold mb-2">Global Spatial Interaction Map</h2>
+                        <p class="text-on-surface-variant max-w-md">Real-time AR hotspots simulated within standardized physical environments.</p>
+                    </div>
+                    <!-- Floorplan Mockup -->
+                    <div class="absolute inset-0 opacity-40 mix-blend-multiply">
+                        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdkDX4iEKLs6JC8FHQiBQSaEc8jqB504H9JlhwID7wGw1VrVWwljuQSiXnqigif4hfg6pyot1jffvzjIk24TI_mm4OHYVD26HIepsIIEZ0wzzX0tBKNMSUIwNouWTl17BWJqdXwKktxCsdB85Wf6tc6WrbxbsLhvJwKX50DH_W-ryqqYwv8sut0lY94GQc4ZIIOMUwhOND4xeucLgJKda52PtQ-dT5VYewJwshBidpmCZlajlW_CtVTTgVmh3c96A-7XscmVK3tWgY" />
+                    </div>
+                    <!-- Animated Blobs (Heatmap simulation) -->
+                    <div class="absolute top-1/4 left-1/3 w-32 h-32 bg-tertiary rounded-full blur-[60px] opacity-40"></div>
+                    <div class="absolute bottom-1/3 right-1/4 w-48 h-48 bg-primary rounded-full blur-[80px] opacity-30"></div>
+                    <div class="absolute top-1/2 right-1/2 w-24 h-24 bg-secondary rounded-full blur-[40px] opacity-50"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: specific Restaurant Overview -->
+        <!-- ============================================== -->
+        <div id="restaurant-view" class="spa-view hidden">
+            <!-- Navigation/Back Header -->
+            <section class="flex flex-col gap-2 mb-8">
+                <button onclick="window.router.navigate('dashboard-view')" class="flex items-center gap-2 text-secondary font-medium group transition-all duration-200 active:scale-95 w-fit">
+                    <span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    <span class="font-label text-sm uppercase tracking-wider">Back to Restaurants Portfolio</span>
+                </button>
+                <div class="mt-4">
+                    <h1 id="res-overview-name" class="font-headline text-3xl md:text-4xl font-bold tracking-tight text-on-surface">Loading Overview</h1>
+                    <p class="text-secondary font-body mt-2">Real-time AR engagement performance and spatial analytics.</p>
+                </div>
+            </section>
+
+            <!-- Metric Cards Grids -->
+            <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                <!-- Total Site Visits -->
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between min-h-[160px]">
+                    <div class="flex items-center justify-between">
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">visibility</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-secondary font-label text-[10px] uppercase tracking-widest">Total Site Visits</p>
+                        <h2 id="res-overview-visits" class="font-headline text-3xl font-bold mt-1 tracking-tight">0</h2>
+                    </div>
+                </div>
+                <!-- AR Views -->
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between min-h-[160px]">
+                    <div class="flex items-center justify-between">
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">view_in_ar</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-secondary font-label text-[10px] uppercase tracking-widest">Model Views</p>
+                        <h2 id="res-overview-ar" class="font-headline text-3xl font-bold mt-1 tracking-tight">0</h2>
+                    </div>
+                </div>
+                
+                <!-- Last Updated -->
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between min-h-[160px] lg:col-span-2">
+                    <div class="flex items-center justify-between">
+                        <div class="p-2 bg-tertiary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary">timer</span>
+                        </div>
+                         <span class="text-[10px] font-bold text-tertiary bg-tertiary/5 px-2 py-1 rounded-full">Active Sync</span>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-secondary font-label text-[10px] uppercase tracking-widest">Last Updated</p>
+                        <h2 id="res-overview-last-update" class="font-headline text-xl font-bold mt-1 tracking-tight truncate">Unknown</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Items Top Views -->
+            <section class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 mb-8">
+                <h3 class="font-headline text-xl font-bold mb-6">Top Model Interactions (Live Data)</h3>
+                <div id="res-overview-items" class="space-y-4">
+                    <!-- Populated dynamically -->
+                    <p class="text-on-surface-variant italic text-sm">No items tracked yet.</p>
+                </div>
+            </section>
+            
+            <!-- Traffic Simulator -->
+             <section class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                 <!-- Activity Graph Placeholder -->
+                 <div class="md:col-span-12 bg-surface-container-low p-8 rounded-xl">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="font-headline text-xl font-bold">Activity Log</h3>
+                            <p class="text-on-surface-variant text-sm border-b border-outline-variant/20 pb-4">Recent tracking events for this restaurant.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="res-overview-events" class="space-y-4 max-h-64 overflow-y-auto pr-2">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+    </main>
+    
+    <!-- ============================================== -->
+    <!-- Filters Modal (Slide-over approach)  -->
+    <!-- ============================================== -->
+    <div id="filter-modal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="document.getElementById('filter-modal').classList.add('hidden')"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface overflow-y-auto shadow-2xl p-6 transition-transform">
+             <div class="flex justify-between items-center mb-8">
+                  <h3 class="font-headline text-xl font-bold">Filter Analytics</h3>
+                  <button class="p-2 hover:bg-surface-container-high rounded-full" onclick="document.getElementById('filter-modal').classList.add('hidden')">
+                       <span class="material-symbols-outlined">close</span>
+                  </button>
+             </div>
+             
+             <div class="space-y-8">
+                 <div class="bg-surface-container-low p-6 rounded-xl">
+                     <span class="font-label text-xs uppercase tracking-widest text-secondary block mb-2">Preset Ranges</span>
+                     <div class="flex flex-wrap gap-2">
+                         <button class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-sm font-semibold">Today</button>
+                         <button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container rounded-full text-sm font-medium">Last 7 Days</button>
+                         <button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container rounded-full text-sm font-medium">All Time</button>
+                     </div>
+                 </div>
+                 
+                 <div class="flex flex-col gap-2">
+                     <label class="font-label text-xs uppercase tracking-widest text-outline">Restaurant Category</label>
+                     <select class="w-full bg-surface-container-high px-4 py-3 rounded-xl border-none focus:ring-2 ring-primary/20 cursor-pointer">
+                         <option>All Categories</option>
+                         <option>Italian & Bistro</option>
+                         <option>Fast Food</option>
+                         <option>Dessert & Cafes</option>
+                     </select>
+                 </div>
+                 
+                 <div class="flex flex-col gap-2">
+                     <label class="font-label text-xs uppercase tracking-widest text-outline">Device Type</label>
+                     <div class="flex gap-2">
+                         <button class="flex-1 py-3 bg-primary/10 text-primary border-primary/20 rounded-xl border-2 transition-all flex flex-col items-center gap-1">
+                             <span class="material-symbols-outlined">smartphone</span>
+                             <span class="text-xs font-semibold">Mobile</span>
+                         </button>
+                         <button class="flex-1 py-3 bg-surface-container-low rounded-xl border-2 border-transparent hover:border-primary/20 transition-all flex flex-col items-center gap-1">
+                             <span class="material-symbols-outlined">eyeglasses</span>
+                             <span class="text-xs font-semibold">AR Glasses</span>
+                         </button>
+                     </div>
+                 </div>
+             </div>
+             
+             <div class="mt-8 pt-8 border-t border-outline-variant/20 flex gap-4">
+                  <button class="flex-1 py-3 font-semibold text-on-surface hover:bg-surface-container-high rounded-xl">Clear All</button>
+                  <button class="flex-1 py-3 font-bold text-white bg-primary rounded-xl" onclick="document.getElementById('filter-modal').classList.add('hidden')">Apply</button>
+             </div>
+        </div>
+    </div>
+
+    <!-- BottomNavBar (Mobile) -->
+    <nav class="md:hidden fixed bottom-0 w-full h-20 bg-[#fcf9f8] dark:bg-[#1c1b1b] flex justify-around items-center px-4 rounded-t-[2rem] z-50 shadow-[0_-5px_20px_rgba(28,27,27,0.06)]" id="mobile-nav">
+        <a class="nav-link flex flex-col items-center justify-center tap-highlight-none text-[#006565] scale-110 transition-all" data-target="dashboard-view" href="#">
+            <span class="material-symbols-outlined text-2xl" id="icon-dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span class="font-['Inter'] font-semibold text-[9px] uppercase tracking-widest mt-1">Dash</span>
+        </a>
+        <a class="nav-link flex flex-col items-center justify-center tap-highlight-none text-[#436464] opacity-70 transition-all" data-target="analytics-view" href="#">
+            <span class="material-symbols-outlined text-2xl" id="icon-analytics">analytics</span>
+            <span class="font-['Inter'] font-semibold text-[9px] uppercase tracking-widest mt-1">Analytics</span>
+        </a>
+    </nav>
+
+    <!-- Specific dashboard scripts -->
+    <script src="dashboard/js/dashboard.js"></script>
+</body>
+</html>
