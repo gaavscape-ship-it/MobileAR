@@ -6,6 +6,15 @@ function formatPrice(amount) {
     return `${currency}${amount.toFixed(2)}`;
 }
 
+/**
+ * Checks whether a menu item has a valid 3D model file.
+ * @param {*} model - The model field from a menu item.
+ * @returns {boolean} True if model is a non-empty string ending with ".glb".
+ */
+export function hasValidModel(model) {
+    return model && typeof model === 'string' && model.trim() !== '' && model.endsWith('.glb');
+}
+
 export function renderCategories(categories, activeCategoryId, onSelect) {
     const container = document.getElementById('category-list');
     if (!container) return;
@@ -82,28 +91,57 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
             const el = document.createElement('div');
             el.className = 'flex flex-col group food-item';
 
+            function hasValidRating(rating) { return rating !== null && rating !== "" && !isNaN(rating); }
+
+            const itemHasAR = hasValidModel(item.model);
+
+            // Check if there is a specific dietary tag
+            const dietaryTag = (item.tags || []).find(tag => {
+                const lower = tag.toLowerCase();
+                return lower === 'veg' || lower === 'non-veg' || lower === 'non veg';
+            });
+
+            // Filter tags: exclude "Veg" and "Non-Veg" — those are shown in the bottom-left badge
+            const displayTags = (item.tags || []).filter(tag => {
+                const lower = tag.toLowerCase();
+                return lower !== 'veg' && lower !== 'non-veg' && lower !== 'non veg';
+            });
+
+            const tagBadgesHtml = displayTags.length > 0
+                ? `<div class="absolute top-2 right-2 flex flex-row gap-1 z-[5]">
+                       ${displayTags.map(tag => `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-black/70 text-white shadow-sm">${tag}</span>`).join('')}
+                   </div>`
+                : '';
+
             el.innerHTML = `
-                <div class="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden mb-4 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)]">
-                    <img class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-in-out" src="${item.image}" alt="${item.name}"/>
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-amber-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="font-semibold text-xs text-slate-800">${item.rating}</span>
+
+                <div class="dish-image-wrapper relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-4 cursor-pointer active:scale-95 transition-transform duration-200">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${item.image}" alt="${item.name}"/>
+                    ${tagBadgesHtml}
+                    <div class="absolute top-3 ${displayTags.length > 0 ? 'left-3' : 'right-3'} bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+                        
+                        ${hasValidRating(item.rating) ? `
+                            <span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-bold text-xs text-on-surface">${item.rating}</span> ` : ``}
                     </div>
-                    ${item.tags && item.tags.length > 0 ? `
-                        <div class="absolute bottom-3 left-3 ${item.tags[0].toLowerCase() === 'veg' ? 'bg-emerald-500/90' : (item.tags[0].toLowerCase().includes('non-veg') || item.tags[0].toLowerCase().includes('non veg') ? 'bg-rose-500/90' : 'bg-slate-700/90')} backdrop-blur-md px-3 py-1 rounded-full text-white font-semibold text-[10px] uppercase tracking-wider shadow-sm">
-                            ${item.tags[0]}
+                    ${dietaryTag ? `
+                        <div class="absolute bottom-3 left-3 ${dietaryTag.toLowerCase() === 'veg' ? 'bg-green-600/90' : 'bg-red-600/90'} backdrop-blur-md px-3 py-1 rounded-full text-white font-bold text-[10px] uppercase tracking-wider shadow-sm">
+                            ${dietaryTag}
+
                         </div>
                     ` : ''}
                 </div>
                 <div class="flex justify-between items-start">
-                    <div class="flex flex-col flex-1 pl-1">
-                        <h4 class="font-headline text-base font-bold text-slate-800 leading-snug tracking-tight">${item.name}</h4>
-                        <p class="text-slate-500 text-[13px] leading-relaxed line-clamp-1 mt-0.5">${item.description || ''}</p>
-                        <div class="flex items-center justify-between mt-2.5 pr-2">
-                            <span class="text-slate-800 font-bold text-[15px]">${formatPrice(item.price)}</span>
-                            ${item.model ? `
-                            <button class="ar-btn flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-700 border-none text-[10px] font-bold uppercase tracking-wider shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:bg-slate-100 hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 ease-in-out text-nowrap">
-                                <span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+
+                    <div class="flex flex-col flex-1">
+                        <h4 class="font-headline text-lg font-bold text-on-surface">${item.name}</h4>
+                        <p class="text-on-surface-variant/70 text-sm font-medium line-clamp-1">${item.description || ''}</p>
+                        <div class="flex items-center justify-between mt-1 pr-2">
+                            <span class="text-primary font-bold">${formatPrice(item.price)}</span>
+                            ${itemHasAR ? `
+                            <button class="ar-btn flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/30 text-[10px] font-extrabold uppercase tracking-wider shadow-sm hover:bg-primary hover:text-white hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all text-nowrap">
+                                <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+
                                 View in AR
                             </button>` : ''}
                         </div>
@@ -119,7 +157,16 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
                 showToast(`Added ${item.name} to cart`);
             };
 
-            if (item.model) {
+            // Image click: open AR modal if valid model, else open 2D image lightbox
+            el.querySelector('.dish-image-wrapper').onclick = () => {
+                if (itemHasAR) {
+                    window.openArModal(item.model, item.name);
+                } else {
+                    window.openImageModal(item.image, item.name);
+                }
+            };
+
+            if (itemHasAR) {
                 el.querySelector('.ar-btn').onclick = () => {
                     window.openArModal(item.model, item.name);
                 };
