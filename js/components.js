@@ -17,10 +17,10 @@ export function renderCategories(categories, activeCategoryId, onSelect) {
     const allIsActive = activeCategoryId === 'all';
     allItem.className = `flex flex-col items-center gap-2 flex-shrink-0 group cursor-pointer category-item ${allIsActive ? 'active' : ''}`;
     allItem.innerHTML = `
-        <div class="w-20 h-20 rounded-full bg-surface-container-lowest overflow-hidden shadow-sm group-hover:shadow-md transition-all p-1 category-circle flex items-center justify-center" style="${allIsActive ? 'border: 2px solid #b7112d; padding: 0;' : ''}">
-            <span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+        <div class="w-16 h-16 rounded-full bg-slate-50 overflow-hidden shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] group-hover:shadow-[0_4px_20px_-3px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 ease-in-out p-1 category-circle flex items-center justify-center" style="${allIsActive ? 'border: 2px solid #334155; padding: 0;' : ''}">
+            <span class="material-symbols-outlined text-slate-800 text-2xl">restaurant</span>
         </div>
-        <span class="font-label text-sm font-semibold text-on-surface-variant">All</span>
+        <span class="font-label text-xs font-medium text-slate-500">All</span>
     `;
     allItem.onclick = () => onSelect('all');
     container.appendChild(allItem);
@@ -35,11 +35,11 @@ export function renderCategories(categories, activeCategoryId, onSelect) {
         const firstImage = cat.items[0]?.image || '';
 
         const catNameHtml = cat.name.length > 20
-            ? `<div class="w-20 overflow-hidden text-center"><span class="font-label text-sm font-semibold text-on-surface-variant marquee-scroll">${cat.name}</span></div>`
-            : `<span class="font-label text-sm font-semibold text-on-surface-variant text-center leading-tight line-clamp-2 w-20">${cat.name}</span>`;
+            ? `<div class="w-16 overflow-hidden text-center"><span class="font-label text-xs font-medium text-slate-500 marquee-scroll">${cat.name}</span></div>`
+            : `<span class="font-label text-xs font-medium text-slate-500 text-center leading-tight line-clamp-2 w-16">${cat.name}</span>`;
 
         item.innerHTML = `
-            <div class="w-20 h-20 rounded-full bg-surface-container-lowest overflow-hidden shadow-sm group-hover:shadow-md transition-all p-1 category-circle mb-1" style="${isActive ? 'border: 2px solid #b7112d; padding: 0;' : ''}">
+            <div class="w-16 h-16 rounded-full bg-slate-50 overflow-hidden shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] group-hover:shadow-[0_4px_20px_-3px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 ease-in-out p-1 category-circle mb-1" style="${isActive ? 'border: 2px solid #334155; padding: 0;' : ''}">
                 <img class="w-full h-full object-cover rounded-full" src="${firstImage}" alt="${cat.name}"/>
             </div>
             ${catNameHtml}
@@ -83,33 +83,33 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
             el.className = 'flex flex-col group food-item';
 
             el.innerHTML = `
-                <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-4">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${item.image}" alt="${item.name}"/>
+                <div class="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden mb-4 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)]">
+                    <img class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-in-out" src="${item.image}" alt="${item.name}"/>
                     <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="font-bold text-xs text-on-surface">${item.rating}</span>
+                        <span class="material-symbols-outlined text-amber-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="font-semibold text-xs text-slate-800">${item.rating}</span>
                     </div>
                     ${item.tags && item.tags.length > 0 ? `
-                        <div class="absolute bottom-3 left-3 ${item.tags[0].toLowerCase() === 'veg' ? 'bg-green-600/90' : (item.tags[0].toLowerCase().includes('non-veg') || item.tags[0].toLowerCase().includes('non veg') ? 'bg-red-600/90' : 'bg-primary-container/90')} backdrop-blur-md px-3 py-1 rounded-full text-white font-bold text-[10px] uppercase tracking-wider shadow-sm">
+                        <div class="absolute bottom-3 left-3 ${item.tags[0].toLowerCase() === 'veg' ? 'bg-emerald-500/90' : (item.tags[0].toLowerCase().includes('non-veg') || item.tags[0].toLowerCase().includes('non veg') ? 'bg-rose-500/90' : 'bg-slate-700/90')} backdrop-blur-md px-3 py-1 rounded-full text-white font-semibold text-[10px] uppercase tracking-wider shadow-sm">
                             ${item.tags[0]}
                         </div>
                     ` : ''}
                 </div>
                 <div class="flex justify-between items-start">
-                    <div class="flex flex-col flex-1">
-                        <h4 class="font-headline text-lg font-bold text-on-surface">${item.name}</h4>
-                        <p class="text-on-surface-variant/70 text-sm font-medium line-clamp-1">${item.description || ''}</p>
-                        <div class="flex items-center justify-between mt-1 pr-2">
-                            <span class="text-primary font-bold">${formatPrice(item.price)}</span>
+                    <div class="flex flex-col flex-1 pl-1">
+                        <h4 class="font-headline text-base font-bold text-slate-800 leading-snug tracking-tight">${item.name}</h4>
+                        <p class="text-slate-500 text-[13px] leading-relaxed line-clamp-1 mt-0.5">${item.description || ''}</p>
+                        <div class="flex items-center justify-between mt-2.5 pr-2">
+                            <span class="text-slate-800 font-bold text-[15px]">${formatPrice(item.price)}</span>
                             ${item.model ? `
-                            <button class="ar-btn flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/30 text-[10px] font-extrabold uppercase tracking-wider shadow-sm hover:bg-primary hover:text-white hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all text-nowrap">
-                                <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+                            <button class="ar-btn flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-700 border-none text-[10px] font-bold uppercase tracking-wider shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:bg-slate-100 hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 ease-in-out text-nowrap">
+                                <span class="material-symbols-outlined text-[18px]">view_in_ar</span>
                                 View in AR
                             </button>` : ''}
                         </div>
                     </div>
-                    <button class="add-btn bg-surface-container-high hover:bg-primary hover:text-white transition-colors p-2 rounded-full ml-2 shadow flex-shrink-0 flex self-start">
-                        <span class="material-symbols-outlined text-xl">add</span>
+                    <button class="add-btn bg-slate-800 hover:bg-slate-700 hover:-translate-y-0.5 text-white transition-all duration-300 ease-in-out p-2.5 rounded-full ml-3 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.15)] flex-shrink-0 flex self-start active:scale-95">
+                        <span class="material-symbols-outlined text-[18px]">add</span>
                     </button>
                 </div>
             `;
@@ -184,21 +184,21 @@ export function renderCheckoutItems() {
 
     cart.items.forEach(item => {
         const el = document.createElement('div');
-        el.className = 'group relative flex gap-5 p-4 bg-surface-container-lowest rounded-2xl shadow-[0px_12px_32px_rgba(28,27,27,0.04)] hover:shadow-[0px_12px_32px_rgba(28,27,27,0.08)] transition-all overflow-hidden border border-transparent hover:border-outline-variant/20';
+        el.className = 'group relative flex gap-5 p-4 bg-slate-50 rounded-[24px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_20px_-3px_rgba(0,0,0,0.08)] transition-all duration-300 ease-in-out overflow-hidden border border-transparent';
 
         el.innerHTML = `
-            <div class="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+            <div class="relative w-24 h-24 rounded-[16px] overflow-hidden flex-shrink-0">
                 <img class="w-full h-full object-cover" src="${item.image}" alt="${item.name}"/>
             </div>
             <div class="flex flex-col justify-center flex-grow">
-                <h3 class="font-headline text-lg font-bold leading-tight mb-1">${item.name}</h3>
-                <p class="font-label text-sm text-on-surface-variant/70 mb-2">${item.quantity} qty</p>
+                <h3 class="font-headline text-[15px] font-bold leading-tight mb-1 text-slate-800">${item.name}</h3>
+                <p class="font-label text-xs text-slate-500 mb-2">${item.quantity} qty</p>
                 <div class="flex justify-between items-center">
-                    <span class="font-headline font-extrabold text-primary text-lg">${formatPrice(item.price * item.quantity)}</span>
-                    <div class="flex items-center gap-3 bg-surface-container-low px-3 py-1.5 rounded-full">
-                        <button class="dec-btn flex items-center justify-center text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">remove</span></button>
-                        <span class="font-headline font-bold text-sm px-1 w-4 text-center">${item.quantity}</span>
-                        <button class="inc-btn flex items-center justify-center text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">add</span></button>
+                    <span class="font-headline font-bold text-slate-800 text-[15px]">${formatPrice(item.price * item.quantity)}</span>
+                    <div class="flex items-center gap-3 bg-white px-3 py-1.5 rounded-full shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-slate-100">
+                        <button class="dec-btn flex items-center justify-center text-sm text-slate-400 cursor-pointer hover:text-slate-800 transition-colors duration-300"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+                        <span class="font-headline font-bold text-[13px] px-1 w-4 text-center text-slate-800">${item.quantity}</span>
+                        <button class="inc-btn flex items-center justify-center text-sm text-slate-400 cursor-pointer hover:text-slate-800 transition-colors duration-300"><span class="material-symbols-outlined text-[18px]">add</span></button>
                     </div>
                 </div>
             </div>
