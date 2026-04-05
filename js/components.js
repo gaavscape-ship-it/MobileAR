@@ -24,12 +24,10 @@ export function renderCategories(categories, activeCategoryId, onSelect) {
     // "All" category
     const allItem = document.createElement('div');
     const allIsActive = activeCategoryId === 'all';
-    allItem.className = `flex flex-col items-center gap-2 flex-shrink-0 group cursor-pointer category-item ${allIsActive ? 'active' : ''}`;
+    allItem.className = `flex items-center gap-2 px-4 py-2.5 rounded-full shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] flex-shrink-0 group cursor-pointer category-item transition-all duration-300 ease-in-out ${allIsActive ? 'active bg-slate-800 text-white border border-slate-800' : 'bg-white text-slate-600 border border-transparent hover:bg-slate-50 hover:shadow-md'}`;
     allItem.innerHTML = `
-        <div class="w-16 h-16 rounded-full bg-slate-50 overflow-hidden shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] group-hover:shadow-[0_4px_20px_-3px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 ease-in-out p-1 category-circle flex items-center justify-center" style="${allIsActive ? 'border: 2px solid #334155; padding: 0;' : ''}">
-            <span class="material-symbols-outlined text-slate-800 text-2xl">restaurant</span>
-        </div>
-        <span class="font-label text-xs font-medium text-slate-500">All</span>
+        <span class="material-symbols-outlined text-[18px]">restaurant</span>
+        <span class="font-label text-[14px] font-semibold whitespace-nowrap">All</span>
     `;
     allItem.onclick = () => onSelect('all');
     container.appendChild(allItem);
@@ -38,18 +36,16 @@ export function renderCategories(categories, activeCategoryId, onSelect) {
     categories.forEach(cat => {
         const item = document.createElement('div');
         const isActive = activeCategoryId === cat.id;
-        item.className = `flex flex-col items-center gap-2 flex-shrink-0 group cursor-pointer category-item ${isActive ? 'active' : ''}`;
+        item.className = `flex items-center gap-2 px-4 py-2.5 rounded-full shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] flex-shrink-0 group cursor-pointer category-item transition-all duration-300 ease-in-out ${isActive ? 'active bg-slate-800 text-white border border-slate-800' : 'bg-white text-slate-600 border border-transparent hover:bg-slate-50 hover:shadow-md'}`;
 
         // Take the first item's image as category image for simplicity
         const firstImage = cat.items[0]?.image || '';
 
-        const catNameHtml = cat.name.length > 20
-            ? `<div class="w-16 overflow-hidden text-center"><span class="font-label text-xs font-medium text-slate-500 marquee-scroll">${cat.name}</span></div>`
-            : `<span class="font-label text-xs font-medium text-slate-500 text-center leading-tight line-clamp-2 w-16">${cat.name}</span>`;
+        const catNameHtml = `<span class="font-label text-[14px] font-semibold whitespace-nowrap">${cat.name}</span>`;
 
         item.innerHTML = `
-            <div class="w-16 h-16 rounded-full bg-slate-50 overflow-hidden shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] group-hover:shadow-[0_4px_20px_-3px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 ease-in-out p-1 category-circle mb-1" style="${isActive ? 'border: 2px solid #334155; padding: 0;' : ''}">
-                <img class="w-full h-full object-cover rounded-full" src="${firstImage}" alt="${cat.name}"/>
+            <div class="w-7 h-7 rounded-full bg-slate-100 overflow-hidden group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <img class="w-full h-full object-cover" src="${firstImage}" alt="${cat.name}"/>
             </div>
             ${catNameHtml}
         `;
@@ -146,8 +142,8 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
                             </button>` : ''}
                         </div>
                     </div>
-                    <button class="add-btn bg-slate-800 hover:bg-slate-700 hover:-translate-y-0.5 text-white transition-all duration-300 ease-in-out p-2.5 rounded-full ml-3 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.15)] flex-shrink-0 flex self-start active:scale-95">
-                        <span class="material-symbols-outlined text-[18px]">add</span>
+                    <button class="add-btn bg-primary hover:bg-red-600 active:scale-95 text-white transition-all duration-300 ease-in-out w-12 h-12 rounded-full shadow-[0_4px_15px_-3px_rgba(255,77,77,0.3)] flex-shrink-0 flex items-center justify-center -mt-1 group-hover:rotate-90 origin-center">
+                        <span class="material-symbols-outlined text-[24px]">add</span>
                     </button>
                 </div>
             `;
