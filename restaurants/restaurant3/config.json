@@ -307,7 +307,7 @@
           "name": "Monster Energy Drink with out model",
           "description": "Refreshing canned energy drink.",
           "price": 125,
-          "image": "restaurants/restaurant3/dish-images/monster.webp",
+          "image": "restaurants/restaurant3/dish-images/monster.png",
           "model": null,
           "tags": [
             "Cold"
