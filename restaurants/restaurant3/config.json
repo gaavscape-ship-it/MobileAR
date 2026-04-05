@@ -15,7 +15,7 @@
           "name": "French Fries",
           "description": "Crispy golden fried potato sticks.",
           "price": 129,
-          "image": "restaurants/restaurant3/dish-images/fries.jpg",
+          "image": "restaurants/restaurant3/dish-images/fries.png",
           "model": "/restaurants/restaurant3/models/fries.glb",
           "tags": [
             "Veg"
@@ -29,7 +29,7 @@
           "name": "Tandoori Chicken",
           "description": "Spicy roasted chicken cooked in tandoor.",
           "price": 349,
-          "image": "restaurants/restaurant3/dish-images/tandoori_chicken.jpg",
+          "image": "restaurants/restaurant3/dish-images/tandoori_chicken.png",
           "model": "/restaurants/restaurant3/models/tandoori_chicken-poly.glb",
           "tags": [
             "Non-Veg",
@@ -44,7 +44,7 @@
           "name": "Full Chicken Platter",
           "description": "Delicious whole chicken.",
           "price": 299,
-          "image": "restaurants/restaurant3/dish-images/chicken_duck.jpg",
+          "image": "restaurants/restaurant3/dish-images/chicken_duck.png",
           "model": "/restaurants/restaurant3/models/chicken_duck.glb",
           "tags": [
             "Non-Veg"
@@ -64,7 +64,7 @@
           "name": "Indian Thali",
           "description": "Complete Indian meal with roti, sabji, and sides.",
           "price": 249,
-          "image": "restaurants/restaurant3/dish-images/indian_thali.jpg",
+          "image": "restaurants/restaurant3/dish-images/indian_thali.png",
           "model": "/restaurants/restaurant3/models/indian_thali_1.glb",
           "tags": [
             "Veg"
@@ -78,7 +78,7 @@
           "name": "Roti & Sabji",
           "description": "Traditional Indian bread with vegetable curry.",
           "price": 149,
-          "image": "restaurants/restaurant3/dish-images/roti_sabji.jpg",
+          "image": "restaurants/restaurant3/dish-images/roti_sabji.png",
           "model": "/restaurants/restaurant3/models/roti_sabji.glb",
           "tags": [
             "Veg"
@@ -92,7 +92,7 @@
           "name": "Spicy Fish Biryani",
           "description": "Flavorful biryani with spicy fish pieces.",
           "price": 299,
-          "image": "restaurants/restaurant3/dish-images/fish_biryani.jpg",
+          "image": "restaurants/restaurant3/dish-images/fish_biryani.png",
           "model": "/restaurants/restaurant3/models/spicy_fish_biryani.glb",
           "tags": [
             "Non-Veg",
@@ -113,7 +113,7 @@
           "name": "Hainanese Chicken Rice",
           "description": "Classic Southeast Asian poached chicken with rice.",
           "price": 279,
-          "image": "restaurants/restaurant3/dish-images/hainanese_chicken_rice.jpg",
+          "image": "restaurants/restaurant3/dish-images/hainanese_chicken_rice.png",
           "model": "/restaurants/restaurant3/models/hainanese_chicken_rice.glb",
           "tags": [
             "Non-Veg"
@@ -127,7 +127,7 @@
           "name": "Laksa Soup",
           "description": "Spicy noodle soup with rich coconut broth.",
           "price": 259,
-          "image": "restaurants/restaurant3/dish-images/laksa.jpg",
+          "image": "restaurants/restaurant3/dish-images/laksa.png",
           "model": "/restaurants/restaurant3/models/sarawak_laksa_scaniverse.glb",
           "tags": [
             "Non-Veg",
@@ -142,7 +142,7 @@
           "name": "Gado-Gado Salad",
           "description": "Indonesian salad with peanut dressing.",
           "price": 199,
-          "image": "restaurants/restaurant3/dish-images/gado_gado.jpg",
+          "image": "restaurants/restaurant3/dish-images/gado_gado.png",
           "model": "/restaurants/restaurant3/models/gado_gado_indonesian_salad_scaniverse.glb",
           "tags": [
             "Veg"
@@ -162,7 +162,7 @@
           "name": "Classic Burger",
           "description": "Juicy burger with fresh veggies and sauce.",
           "price": 179,
-          "image": "restaurants/restaurant3/dish-images/burger.jpg",
+          "image": "restaurants/restaurant3/dish-images/burger.png",
           "model": "/restaurants/restaurant3/models/Burger.glb",
           "tags": [
             "Veg"
@@ -176,7 +176,7 @@
           "name": "Chicken Paprika",
           "description": "Grilled chicken with paprika spices.",
           "price": 229,
-          "image": "restaurants/restaurant3/dish-images/chicken_paprika.jpg",
+          "image": "restaurants/restaurant3/dish-images/chicken_paprika.png",
           "model": "/restaurants/restaurant3/models/chicken_paprika.glb",
           "tags": [
             "Non-Veg"
@@ -190,7 +190,7 @@
           "name": "Pizza Tray",
           "description": "Loaded cheesy pizza platter.",
           "price": 299,
-          "image": "restaurants/restaurant3/dish-images/pizza.jpg",
+          "image": "restaurants/restaurant3/dish-images/pizza.png",
           "model": "/restaurants/restaurant3/models/pizza__tray.glb",
           "tags": [
             "Veg"
@@ -210,7 +210,7 @@
           "name": "Healthy Salad Bowl",
           "description": "Fresh greens with vegetables.",
           "price": 149,
-          "image": "restaurants/restaurant3/dish-images/salad.jpg",
+          "image": "restaurants/restaurant3/dish-images/salad.png",
           "model": "/restaurants/restaurant3/models/bowl_with_salad.glb",
           "tags": [
             "Veg",
@@ -225,7 +225,7 @@
           "name": "Italian Salad",
           "description": "Mediterranean-style fresh salad.",
           "price": 179,
-          "image": "restaurants/restaurant3/dish-images/italian_salad.jpg",
+          "image": "restaurants/restaurant3/dish-images/italian_salad.png",
           "model": "/restaurants/restaurant3/models/italian_salad.glb",
           "tags": [
             "Veg"
@@ -245,7 +245,7 @@
           "name": "Cherry Cake",
           "description": "Soft cake topped with cherry.",
           "price": 149,
-          "image": "restaurants/restaurant3/dish-images/cake.jpg",
+          "image": "restaurants/restaurant3/dish-images/cake.png",
           "model": "/restaurants/restaurant3/models/cake_with_cherry.glb",
           "tags": [
             "Veg"
@@ -259,7 +259,7 @@
           "name": "Tiramisu",
           "description": "Classic coffee-flavored Italian dessert.",
           "price": 199,
-          "image": "restaurants/restaurant3/dish-images/tiramisu.jpg",
+          "image": "restaurants/restaurant3/dish-images/tiramisu.png",
           "model": "/restaurants/restaurant3/models/tiramisu_-_low_poly_challenge_desserts.glb",
           "tags": [
             "Veg"
@@ -279,7 +279,7 @@
           "name": "Black Coffee",
           "description": "Hot brewed strong coffee.",
           "price": 99,
-          "image": "restaurants/restaurant3/dish-images/coffee.jpg",
+          "image": "restaurants/restaurant3/dish-images/coffee.png",
           "model": "/restaurants/restaurant3/models/cup_of_coffee.glb",
           "tags": [
             "Veg"
@@ -293,7 +293,7 @@
           "name": "Monster Energy Drink",
           "description": "Refreshing canned energy drink.",
           "price": 125,
-          "image": "restaurants/restaurant3/dish-images/monster.webp",
+          "image": "restaurants/restaurant3/dish-images/monster.png",
           "model": "/restaurants/restaurant3/models/monster_energy_drink.glb",
           "tags": [
             "Cold"
