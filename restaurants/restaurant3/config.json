@@ -301,6 +301,20 @@
           "rating": 4.3,
           "isAvailable": true,
           "portion": "Can"
+        },
+        {
+          "id": "dr_3",
+          "name": "Monster Energy Drink with out model",
+          "description": "Refreshing canned energy drink.",
+          "price": 125,
+          "image": "restaurants/restaurant3/dish-images/monster.png",
+          "model": null,
+          "tags": [
+            "Cold"
+          ],
+          "rating": null,
+          "isAvailable": true,
+          "portion": "Can"
         }
       ]
     }
