@@ -15,12 +15,10 @@ export function renderCategories(categories, activeCategoryId, onSelect) {
     // "All" category
     const allItem = document.createElement('div');
     const allIsActive = activeCategoryId === 'all';
-    allItem.className = `flex flex-col items-center gap-2 flex-shrink-0 group cursor-pointer category-item ${allIsActive ? 'active' : ''}`;
+    allItem.className = `flex items-center gap-2 px-4 py-2.5 rounded-full shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] flex-shrink-0 group cursor-pointer category-item transition-all duration-300 ease-in-out ${allIsActive ? 'active bg-slate-800 text-white border border-slate-800' : 'bg-white text-slate-600 border border-transparent hover:bg-slate-50 hover:shadow-md'}`;
     allItem.innerHTML = `
-        <div class="w-16 h-16 rounded-full bg-slate-50 overflow-hidden shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] group-hover:shadow-[0_4px_20px_-3px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 ease-in-out p-1 category-circle flex items-center justify-center" style="${allIsActive ? 'border: 2px solid #334155; padding: 0;' : ''}">
-            <span class="material-symbols-outlined text-slate-800 text-2xl">restaurant</span>
-        </div>
-        <span class="font-label text-xs font-medium text-slate-500">All</span>
+        <span class="material-symbols-outlined text-[18px]">restaurant</span>
+        <span class="font-label text-[14px] font-semibold whitespace-nowrap">All</span>
     `;
     allItem.onclick = () => onSelect('all');
     container.appendChild(allItem);
@@ -29,18 +27,16 @@ export function renderCategories(categories, activeCategoryId, onSelect) {
     categories.forEach(cat => {
         const item = document.createElement('div');
         const isActive = activeCategoryId === cat.id;
-        item.className = `flex flex-col items-center gap-2 flex-shrink-0 group cursor-pointer category-item ${isActive ? 'active' : ''}`;
+        item.className = `flex items-center gap-2 px-4 py-2.5 rounded-full shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] flex-shrink-0 group cursor-pointer category-item transition-all duration-300 ease-in-out ${isActive ? 'active bg-slate-800 text-white border border-slate-800' : 'bg-white text-slate-600 border border-transparent hover:bg-slate-50 hover:shadow-md'}`;
 
         // Take the first item's image as category image for simplicity
         const firstImage = cat.items[0]?.image || '';
 
-        const catNameHtml = cat.name.length > 20
-            ? `<div class="w-16 overflow-hidden text-center"><span class="font-label text-xs font-medium text-slate-500 marquee-scroll">${cat.name}</span></div>`
-            : `<span class="font-label text-xs font-medium text-slate-500 text-center leading-tight line-clamp-2 w-16">${cat.name}</span>`;
+        const catNameHtml = `<span class="font-label text-[14px] font-semibold whitespace-nowrap">${cat.name}</span>`;
 
         item.innerHTML = `
-            <div class="w-16 h-16 rounded-full bg-slate-50 overflow-hidden shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] group-hover:shadow-[0_4px_20px_-3px_rgba(0,0,0,0.08)] group-hover:-translate-y-0.5 transition-all duration-300 ease-in-out p-1 category-circle mb-1" style="${isActive ? 'border: 2px solid #334155; padding: 0;' : ''}">
-                <img class="w-full h-full object-cover rounded-full" src="${firstImage}" alt="${cat.name}"/>
+            <div class="w-7 h-7 rounded-full bg-slate-100 overflow-hidden group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <img class="w-full h-full object-cover" src="${firstImage}" alt="${cat.name}"/>
             </div>
             ${catNameHtml}
         `;
@@ -83,33 +79,41 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
             el.className = 'flex flex-col group food-item';
 
             el.innerHTML = `
-                <div class="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden mb-4 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.1)]">
-                    <img class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-in-out" src="${item.image}" alt="${item.name}"/>
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-amber-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="font-semibold text-xs text-slate-800">${item.rating}</span>
+                <div class="relative w-full aspect-[4/3] rounded-[24px] overflow-hidden mb-5 shadow-soft transition-all duration-500 ease-in-out group-hover:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.15)] group-hover:-translate-y-1">
+                    <img class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out" src="${item.image}" alt="${item.name}"/>
+                    
+                    <!-- Top floating elements -->
+                    <div class="absolute top-3 left-0 w-full px-3 flex justify-between items-start pointer-events-none">
+                        ${item.tags && item.tags.length > 0 ? `
+                            <div class="${item.tags[0].toLowerCase() === 'veg' ? 'bg-emerald-500' : (item.tags[0].toLowerCase().includes('non-veg') || item.tags[0].toLowerCase().includes('non veg') ? 'bg-rose-500' : 'bg-slate-700')} px-3 py-1 rounded-full text-white font-bold text-[10px] uppercase tracking-widest shadow-md">
+                                ${item.tags[0]}
+                            </div>
+                        ` : '<div></div>'}
+                        
+                       <!-- <div class="glass-panel px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                            <span class="material-symbols-outlined text-amber-500 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-bold text-[12px] text-slate-800">${item.rating}</span>
+                        </div>-->
                     </div>
-                    ${item.tags && item.tags.length > 0 ? `
-                        <div class="absolute bottom-3 left-3 ${item.tags[0].toLowerCase() === 'veg' ? 'bg-emerald-500/90' : (item.tags[0].toLowerCase().includes('non-veg') || item.tags[0].toLowerCase().includes('non veg') ? 'bg-rose-500/90' : 'bg-slate-700/90')} backdrop-blur-md px-3 py-1 rounded-full text-white font-semibold text-[10px] uppercase tracking-wider shadow-sm">
-                            ${item.tags[0]}
-                        </div>
-                    ` : ''}
+
+                    <!-- AR CTA Overlaid on Image Bottom -->
+                    ${item.model ? `
+                    <div class="absolute bottom-4 left-0 w-full flex justify-center z-10 pointer-events-auto">
+                        <button class="ar-btn ar-pulse-btn flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-ar-gradient-start to-ar-gradient-end text-white border-none text-[12px] font-bold uppercase tracking-widest shadow-[0_8px_20px_-5px_rgba(255,65,108,0.5)] hover:shadow-[0_12px_25px_-5px_rgba(255,65,108,0.6)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 ease-in-out">
+                            <span class="material-symbols-outlined text-[20px]">view_in_ar</span>
+                            View in AR
+                        </button>
+                    </div>` : ''}
                 </div>
-                <div class="flex justify-between items-start">
-                    <div class="flex flex-col flex-1 pl-1">
-                        <h4 class="font-headline text-base font-bold text-slate-800 leading-snug tracking-tight">${item.name}</h4>
-                        <p class="text-slate-500 text-[13px] leading-relaxed line-clamp-1 mt-0.5">${item.description || ''}</p>
-                        <div class="flex items-center justify-between mt-2.5 pr-2">
-                            <span class="text-slate-800 font-bold text-[15px]">${formatPrice(item.price)}</span>
-                            ${item.model ? `
-                            <button class="ar-btn flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-700 border-none text-[10px] font-bold uppercase tracking-wider shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:bg-slate-100 hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 ease-in-out text-nowrap">
-                                <span class="material-symbols-outlined text-[18px]">view_in_ar</span>
-                                View in AR
-                            </button>` : ''}
-                        </div>
+                
+                <div class="flex justify-between items-start px-2">
+                    <div class="flex flex-col flex-1 pr-4 gap-1">
+                        <h4 class="font-headline text-xl font-bold text-slate-900 leading-tight">${item.name}</h4>
+                        <p class="font-body text-slate-500 text-[13px] leading-relaxed line-clamp-2">${item.description || ''}</p>
+                        <div class="mt-2 font-body text-slate-900 font-bold text-[18px]">${formatPrice(item.price)}</div>
                     </div>
-                    <button class="add-btn bg-slate-800 hover:bg-slate-700 hover:-translate-y-0.5 text-white transition-all duration-300 ease-in-out p-2.5 rounded-full ml-3 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.15)] flex-shrink-0 flex self-start active:scale-95">
-                        <span class="material-symbols-outlined text-[18px]">add</span>
+                    <button class="add-btn bg-primary hover:bg-red-600 active:scale-95 text-white transition-all duration-300 ease-in-out w-12 h-12 rounded-full shadow-[0_4px_15px_-3px_rgba(255,77,77,0.3)] flex-shrink-0 flex items-center justify-center -mt-1 group-hover:rotate-90 origin-center">
+                        <span class="material-symbols-outlined text-[24px]">add</span>
                     </button>
                 </div>
             `;
