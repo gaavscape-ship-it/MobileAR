@@ -142,11 +142,35 @@ function setupRouter() {
 
     window.addEventListener('popstate', handleRoute);
 
+    function showAlert(message) {
+        const overlay = document.createElement('div');
+        overlay.className = `
+        fixed inset-0 bg-black/40 flex items-center justify-center z-50
+    `;
+        const restaurantName = document.getElementById('restaurant-name-header');
+        overlay.innerHTML = `
+        <div class="bg-white rounded-2xl p-6 w-[280px] text-center shadow-xl">
+            <h3 class="text-lg font-bold mb-2">${restaurantName.textContent}</h3>
+            <p class="text-sm mb-4">${message}</p>
+            <button class="bg-orange-500 text-white px-4 py-2 rounded-full font-semibold">
+                OK
+            </button>
+        </div>
+    `;
+
+        overlay.querySelector('button').onclick = () => {
+            overlay.remove();
+        };
+
+        document.body.appendChild(overlay);
+    }
+
     // Place order: clear cart and return to menu
     const placeOrderBtn = document.getElementById('place-order-btn');
     if (placeOrderBtn) {
         placeOrderBtn.addEventListener('click', () => {
-            alert('Order Placed Successfully!');
+            //alert('Order Placed Successfully!');
+            showAlert('Order Placed Successfully! 🎉');
             clearCart();
             history.pushState(null, null, buildUrl());
             handleRoute();

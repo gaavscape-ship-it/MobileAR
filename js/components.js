@@ -110,43 +110,43 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
                 : '';
 
             el.innerHTML = `
+    <div class="dish-image-wrapper relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-3 cursor-pointer active:scale-95 transition-transform duration-200">
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${item.image}" alt="${item.name}"/>
+        ${tagBadgesHtml}
+        ${dietaryTag ? `<div class="absolute bottom-3 left-3 ${dietaryTag.toLowerCase() === 'veg' ? 'bg-green-600/90' : 'bg-red-600/90'} backdrop-blur-md px-3 py-1 rounded-full text-white font-bold text-[10px] uppercase tracking-wider shadow-sm">${dietaryTag}</div>` : ''}
+    </div>
 
-                <div class="dish-image-wrapper relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-4 cursor-pointer active:scale-95 transition-transform duration-200">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${item.image}" alt="${item.name}"/>
-                    ${tagBadgesHtml}
-                    <div class="absolute top-3 ${displayTags.length > 0 ? 'left-3' : 'right-3'} bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
-                        
-                        ${hasValidRating(item.rating) ? `
-                            <span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="font-bold text-xs text-on-surface">${item.rating}</span> ` : ``}
-                    </div>
-                    ${dietaryTag ? `
-                        <div class="absolute bottom-3 left-3 ${dietaryTag.toLowerCase() === 'veg' ? 'bg-green-600/90' : 'bg-red-600/90'} backdrop-blur-md px-3 py-1 rounded-full text-white font-bold text-[10px] uppercase tracking-wider shadow-sm">
-                            ${dietaryTag}
+    <div class="flex flex-row justify-between items-start w-full">
+        
+        <div class="flex-1 min-w-0 pr-4">
+            <h4 class="font-headline text-lg font-bold text-on-surface leading-tight">${item.name}</h4>
+            
+            <p class="text-on-surface-variant/70 text-sm font-medium mt-1 mb-2">
+                ${item.description || ''}
+            </p>
 
-                        </div>
-                    ` : ''}
-                </div>
-                <div class="flex justify-between items-start">
+            
+        </div>
 
-                    <div class="flex flex-col flex-1">
-                        <h4 class="font-headline text-lg font-bold text-on-surface">${item.name}</h4>
-                        <p class="text-on-surface-variant/70 text-sm font-medium line-clamp-1">${item.description || ''}</p>
-                        <div class="flex items-center justify-between mt-1 pr-2">
-                            <span class="text-primary font-bold">${formatPrice(item.price)}</span>
-                            ${itemHasAR ? `
-                            <button class="ar-btn flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/30 text-[10px] font-extrabold uppercase tracking-wider shadow-sm hover:bg-primary hover:text-white hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all text-nowrap">
-                                <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
-
-                                View in AR
-                            </button>` : ''}
-                        </div>
-                    </div>
-                    <button class="add-btn bg-primary hover:bg-red-600 active:scale-95 text-white transition-all duration-300 ease-in-out w-12 h-12 rounded-full shadow-[0_4px_15px_-3px_rgba(255,77,77,0.3)] flex-shrink-0 flex items-center justify-center -mt-1 group-hover:rotate-90 origin-center">
-                        <span class="material-symbols-outlined text-[24px]">add</span>
+        <div class="flex-shrink-0">
+            <button class="add-btn bg-primary hover:bg-red-600 active:scale-95 text-white transition-all duration-300 w-12 h-12 rounded-full shadow-lg flex items-center justify-center group-hover:rotate-90">
+                <span class="material-symbols-outlined text-[24px]">add</span>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-row items-center justify-between w-full">
+                <span class="text-primary font-bold text-lg whitespace-nowrap">
+                    ${formatPrice(item.price)}
+                </span>
+                
+                ${itemHasAR ? `
+                    <button class="ar-btn flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-bold uppercase tracking-wide shadow-md whitespace-nowrap active:scale-95">
+                        <span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+                        View in AR
                     </button>
-                </div>
-            `;
+                ` : ''}
+            </div>
+`;
 
             el.querySelector('.add-btn').onclick = () => {
                 addToCart(item);
@@ -179,18 +179,48 @@ export function renderMenuItems(categories, activeCategoryId, searchQuery = '', 
 
 function showToast(message) {
     let toast = document.getElementById('toast');
+
     if (!toast) {
         toast = document.createElement('div');
         toast.id = 'toast';
-        toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-sm font-medium shadow-lg z-50 transition-opacity duration-300 opacity-0 pointer-events-none select-none';
+
+        toast.className = `
+            fixed bottom-24 left-1/2 -translate-x-1/2 
+            flex items-center gap-2
+            px-5 py-3 rounded-full
+            bg-white/80 backdrop-blur-xl
+            text-gray-800 text-sm font-semibold
+            shadow-[0_8px_30px_rgba(0,0,0,0.15)]
+            border border-white/40
+            z-50 opacity-0 scale-90
+            transition-all duration-300 ease-out
+            pointer-events-none select-none
+        `;
+
         document.body.appendChild(toast);
     }
-    toast.innerText = message;
-    toast.style.opacity = '1';
 
+    // 🔥 Add icon + message
+    toast.innerHTML = `
+        <span class="material-symbols-outlined text-green-600 text-[18px]">
+            check_circle
+        </span>
+        <span>${message}</span>
+    `;
+
+    // 🔥 Animate in
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+    });
+
+    // Clear previous timeout
     if (window.toastTimeout) clearTimeout(window.toastTimeout);
+
+    // 🔥 Animate out
     window.toastTimeout = setTimeout(() => {
         toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(10px) scale(0.95)';
     }, 2000);
 }
 

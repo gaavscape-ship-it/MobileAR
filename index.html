@@ -7,9 +7,7 @@
     <title>AR Food Ordering</title>
     <!-- Base Path added for relative path routing -->
     <base href="/MobileAR/">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
@@ -244,7 +242,7 @@
                     </span>
                 </button>
             </header>
-            <main class="max-w-7xl mx-auto px-4 sm:px-6 space-y-6 mt-2">
+            <main class="max-w-7xl mx-auto px-4 sm:px-6 space-y-3 mt-2">
                 <!-- Search Bar Section -->
                 <section class="sticky top-2 z-30 pt-2 pb-4 pointer-events-none">
                     <div
@@ -274,21 +272,25 @@
                     <div class="flex items-center justify-between mb-5">
                         <h2 class="font-headline text-2xl font-bold tracking-tight text-slate-800">Popular Dishes</h2>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="menu-items">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="menu-items">
                         <!-- Rendered dynamically by components.js -->
                     </div>
                 </section>
             </main>
 
             <!-- BottomNavBar (Cart Preview) -->
-            <nav class="fixed bottom-0 left-0 w-full flex justify-center items-center px-4 pb-6 pt-3 bg-[#ffffff]/70 backdrop-blur-xl z-40 rounded-t-[2rem] shadow-[0px_-12px_32px_rgba(28,27,27,0.06)] hidden"
+            <nav class="fixed bottom-0 left-0 right-0 flex justify-center items-center px-4 pb-6 pt-3 z-40 pointer-events-none"
                 id="bottom-nav">
+
                 <a href="checkout" data-link
-                    class="flex flex-col items-center justify-center bg-slate-800 text-white rounded-full px-8 py-3 shadow-[0_4px_20px_-3px_rgba(0,0,0,0.2)] hover:-translate-y-1 hover:shadow-lg hover:bg-slate-700 active:scale-95 transition-all duration-300 ease-in-out">
+                    class="pointer-events-auto relative z-50 flex flex-col items-center justify-center bg-slate-800 text-white rounded-full px-8 py-3 shadow-[0_4px_20px_-3px_rgba(0,0,0,0.2)] hover:-translate-y-1 hover:shadow-lg hover:bg-slate-700 active:scale-95 transition-all duration-300 ease-in-out">
+
                     <span class="material-symbols-outlined mb-1 text-xl"
                         style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
-                    <span class="font-label text-[11px] font-semibold uppercase tracking-wider">Cart (<span
-                            id="cart-count">0</span>)</span>
+
+                    <span class="font-label text-[11px] font-semibold uppercase tracking-wider">
+                        Cart (<span id="cart-count">0</span>)
+                    </span>
                 </a>
             </nav>
         </div>
@@ -298,10 +300,9 @@
             <!-- TopAppBar -->
             <header class="w-full top-0 sticky z-40 bg-[#fdf8f8] border-b border-surface-container-highest">
                 <div class="flex items-center px-6 py-4 w-full max-w-2xl mx-auto">
-
-                    <a href="menu" data-link
-                        class="text-primary hover:opacity-80 transition-opacity scale-95 active:scale-90 mr-4 flex items-center">
-                        <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                    <a href="/MobileAR/" data-link
+                        class="text-slate-800 hover:text-primary transition-all duration-300 ease-in-out active:scale-95 mr-4 flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)]">
+                        <span class="material-symbols-outlined text-[20px]">arrow_back</span>
                     </a>
                     <h1 class="font-headline font-bold text-lg tracking-tight text-slate-800">Checkout</h1>
                 </div>

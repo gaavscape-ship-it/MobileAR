@@ -13,7 +13,7 @@
         {
           "id": "st_1",
           "name": "French Fries",
-          "description": "Crispy golden fried potato sticks.",
+          "description": "Crispy golden fried potato sticks. Crispy golden fried potato sticks. ",
           "price": 129,
           "image": "restaurants/restaurant3/dish-images/fries.png",
           "model": "/restaurants/restaurant3/models/fries.glb",
