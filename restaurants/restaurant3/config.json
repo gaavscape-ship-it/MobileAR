@@ -11,18 +11,18 @@
       "name": "Starters",
       "items": [
         {
-          "id": "st_1",
-          "name": "French Fries",
-          "description": "Crispy golden fried potato sticks. Crispy golden fried potato sticks. ",
-          "price": 129,
-          "image": "restaurants/restaurant3/dish-images/fries.png",
-          "model": "/restaurants/restaurant3/models/fries.glb",
+          "id": "ff_2",
+          "name": "Chicken Paprika",
+          "description": "Grilled chicken with paprika spices.",
+          "price": 229,
+          "image": "restaurants/restaurant3/dish-images/chicken_paprika.png",
+          "model": "/restaurants/restaurant3/models/chicken_paprika.glb",
           "tags": [
-            "Veg"
+            "Non-Veg"
           ],
-          "rating": 4.2,
+          "rating": 4.4,
           "isAvailable": true,
-          "portion": "Regular"
+          "portion": "Full"
         },
         {
           "id": "st_3",
@@ -123,6 +123,20 @@
           "portion": "Full"
         },
         {
+          "id": "gc_3",
+          "name": "Gado-Gado Salad",
+          "description": "Indonesian salad with peanut dressing.",
+          "price": 199,
+          "image": "restaurants/restaurant3/dish-images/gado_gado.png",
+          "model": "/restaurants/restaurant3/models/gado_gado_indonesian_salad_scaniverse.glb",
+          "tags": [
+            "Veg"
+          ],
+          "rating": 4.2,
+          "isAvailable": true,
+          "portion": "Bowl"
+        },
+        {
           "id": "gc_2",
           "name": "Laksa Soup",
           "description": "Spicy noodle soup with rich coconut broth.",
@@ -134,20 +148,6 @@
             "Spicy"
           ],
           "rating": 4.3,
-          "isAvailable": true,
-          "portion": "Bowl"
-        },
-        {
-          "id": "gc_3",
-          "name": "Gado-Gado Salad",
-          "description": "Indonesian salad with peanut dressing.",
-          "price": 199,
-          "image": "restaurants/restaurant3/dish-images/gado_gado.png",
-          "model": "/restaurants/restaurant3/models/gado_gado_indonesian_salad_scaniverse.glb",
-          "tags": [
-            "Veg"
-          ],
-          "rating": 4.2,
           "isAvailable": true,
           "portion": "Bowl"
         }
@@ -172,20 +172,6 @@
           "portion": "Single"
         },
         {
-          "id": "ff_2",
-          "name": "Chicken Paprika",
-          "description": "Grilled chicken with paprika spices.",
-          "price": 229,
-          "image": "restaurants/restaurant3/dish-images/chicken_paprika.png",
-          "model": "/restaurants/restaurant3/models/chicken_paprika.glb",
-          "tags": [
-            "Non-Veg"
-          ],
-          "rating": 4.4,
-          "isAvailable": true,
-          "portion": "Full"
-        },
-        {
           "id": "ff_3",
           "name": "Pizza Tray",
           "description": "Loaded cheesy pizza platter.",
@@ -198,6 +184,20 @@
           "rating": 4.5,
           "isAvailable": true,
           "portion": "Medium"
+        },
+        {
+          "id": "st_1",
+          "name": "French Fries",
+          "description": "Crispy golden fried potato sticks. Crispy golden fried potato sticks. ",
+          "price": 129,
+          "image": "restaurants/restaurant3/dish-images/fries.png",
+          "model": "/restaurants/restaurant3/models/fries.glb",
+          "tags": [
+            "Veg"
+          ],
+          "rating": 4.2,
+          "isAvailable": false,
+          "portion": "Regular"
         }
       ]
     },
